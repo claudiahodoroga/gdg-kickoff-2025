@@ -1,7 +1,0 @@
-{
-  "IsEncrypted": false,
-  "Values": {
-    "AZURE_CONN": "DefaultEndpointsProtocol=https;AccountName=kickoffgdgblob;AccountKey=EfRYkJzqCGe9hxaGzb8WsrQzVDz1pgdQOcVJ2I1G2XGotwEFzRCfcRlGR7TUcUm8de9EVuw3IlOe+AStTQqTRw==;EndpointSuffix=core.windows.net",
-    "FUNCTIONS_WORKER_RUNTIME": "node"
-  }
-}
