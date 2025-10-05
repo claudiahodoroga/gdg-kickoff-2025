@@ -10,14 +10,14 @@ on:
   workflow_dispatch:
 
 env:
-  AZURE_FUNCTIONAPP_PACKAGE_PATH: "api" # Changed from '.' to 'api'
-  NODE_VERSION: "22.x" # set this to the node version to use (supports 8.x, 10.x, 12.x)
+  AZURE_FUNCTIONAPP_PACKAGE_PATH: "api"
+  NODE_VERSION: "22.x"
 
 jobs:
   build:
     runs-on: windows-latest
     permissions:
-      contents: read #This is required for actions/checkout
+      contents: read
 
     steps:
       - name: "Checkout GitHub Action"
@@ -35,13 +35,6 @@ jobs:
           npm install
           npm run build --if-present
           npm run test --if-present
-          popd
-
-      - name: Zip artifact for deployment
-        shell: pwsh
-        run: |
-          pushd './${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}'
-          if (Test-Path node_modules) { Remove-Item -Recurse -Force node_modules }
           popd
 
       - name: Upload artifact for deployment job
@@ -68,3 +61,5 @@ jobs:
           slot-name: "Production"
           package: .
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_B121D1801293408FB691CCB88F7639DD }}
+          scm-do-build-during-deployment: true
+          enable-oryx-build: true
