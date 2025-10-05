@@ -19,15 +19,22 @@ document.getElementById('registerForm').addEventListener('submit', async e => {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ username, password })
     });
+    
+    console.log('Register response status:', res.status);
+    console.log('Register response headers:', res.headers);
+    
+    const text = await res.text();
+    console.log('Register response body:', text);
+    
     if (res.ok) {
       messageDiv.textContent = "Registration successful. You can now log in.";
       messageDiv.className = "success";
     } else {
-      const text = await res.text();
-      messageDiv.textContent = "Registration failed: " + text;
+      messageDiv.textContent = "Registration failed (" + res.status + "): " + (text || "No error message");
       messageDiv.className = "error";
     }
   } catch (err) {
+    console.error("Registration error:", err);
     messageDiv.textContent = "Error: " + err.message;
     messageDiv.className = "error";
   }
