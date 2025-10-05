@@ -50,12 +50,20 @@ module.exports = async function (context, req) {
   context.log("Login endpoint hit");
   try {
     if (!JWT_SECRET) {
-      context.res = { status: 500, body: { error: "server_misconfigured" } };
+      context.res = { 
+        status: 500, 
+        headers: { 'Content-Type': 'application/json' },
+        body: "server_misconfigured"
+      };
       return;
     }
     const { username, password } = req.body || {};
     if (!username || !password) {
-      context.res = { status: 400, body: { error: "missing username or password" } };
+      context.res = { 
+        status: 400, 
+        headers: { 'Content-Type': 'application/json' },
+        body: "missing username or password"
+      };
       return;
     }
 
@@ -64,21 +72,37 @@ module.exports = async function (context, req) {
 
     const user = usersObj.users.find((u) => u.username === username);
     if (!user) {
-      context.res = { status: 401, body: { error: "invalid" } };
+      context.res = { 
+        status: 401, 
+        headers: { 'Content-Type': 'application/json' },
+        body: "invalid"
+      };
       return;
     }
 
     const hash = crypto.createHash("sha256").update(password).digest("hex");
     if (hash !== user.hash) {
-      context.res = { status: 401, body: { error: "invalid" } };
+      context.res = { 
+        status: 401, 
+        headers: { 'Content-Type': 'application/json' },
+        body: "invalid"
+      };
       return;
     }
 
     const token = jwt.sign({ username }, JWT_SECRET, { expiresIn: "2h" });
 
-    context.res = { status: 200, body: { message: "ok", token } };
+    context.res = { 
+      status: 200, 
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ message: "ok", token })
+    };
   } catch (err) {
     context.log.error(err);
-    context.res = { status: 500, body: { error: "internal_error" } };
+    context.res = { 
+      status: 500, 
+      headers: { 'Content-Type': 'application/json' },
+      body: "internal_error"
+    };
   }
 };

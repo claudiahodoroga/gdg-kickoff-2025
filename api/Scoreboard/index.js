@@ -53,9 +53,17 @@ module.exports = async function (context, req) {
       .map((u) => ({ username: u.username, score: Number(u.score || 0) }))
       .sort((a, b) => b.score - a.score);
 
-    context.res = { status: 200, body: { message: "ok", scoreboard: results } };
+    context.res = { 
+      status: 200, 
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(results)
+    };
   } catch (err) {
     context.log.error(err);
-    context.res = { status: 500, body: { error: "internal_error" } };
+    context.res = { 
+      status: 500, 
+      headers: { 'Content-Type': 'application/json' },
+      body: "internal_error"
+    };
   }
 };

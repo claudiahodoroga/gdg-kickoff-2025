@@ -67,7 +67,9 @@ async function loadScoreboard() {
       const data = await res.json();
       const tbody = document.querySelector('#scoreboardTable tbody');
       tbody.innerHTML = "";
-      data.forEach((row, i) => {
+      // Handle response as array directly
+      const scoreboardData = Array.isArray(data) ? data : (data.scoreboard || []);
+      scoreboardData.forEach((row, i) => {
         const tr = document.createElement('tr');
         tr.innerHTML =
           "<td>" + (i+1) + "</td>" +
@@ -101,7 +103,7 @@ document.getElementById('flagForm').addEventListener('submit', async e => {
       scoreboardMessage.textContent = "Flag submitted successfully!";
       scoreboardMessage.className = "success";
       document.getElementById('flagInput').value = "";
-      loadScoreboard(); // only updates after flag submission
+      loadScoreboard();
     } else {
       const text = await res.text();
       scoreboardMessage.textContent = "Flag submission failed: " + text;

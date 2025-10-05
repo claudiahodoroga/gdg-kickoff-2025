@@ -65,14 +65,22 @@ module.exports = async function (context, req) {
   context.log("submitFlag endpoint hit");
   try {
     if (!JWT_SECRET) {
-      context.res = { status: 500, body: { error: "server_misconfigured" } };
+      context.res = { 
+        status: 500, 
+        headers: { 'Content-Type': 'application/json' },
+        body: "server_misconfigured"
+      };
       return;
     }
 
     const authHeader = req.headers && (req.headers.authorization || req.headers.Authorization);
     const token = extractTokenFromHeader(authHeader);
     if (!token) {
-      context.res = { status: 401, body: { error: "missing_token" } };
+      context.res = { 
+        status: 401, 
+        headers: { 'Content-Type': 'application/json' },
+        body: "missing_token"
+      };
       return;
     }
 
@@ -80,19 +88,31 @@ module.exports = async function (context, req) {
     try {
       payload = jwt.verify(token, JWT_SECRET);
     } catch (err) {
-      context.res = { status: 401, body: { error: "invalid_token" } };
+      context.res = { 
+        status: 401, 
+        headers: { 'Content-Type': 'application/json' },
+        body: "invalid_token"
+      };
       return;
     }
 
     const username = payload.username;
     if (!username) {
-      context.res = { status: 401, body: { error: "invalid_token" } };
+      context.res = { 
+        status: 401, 
+        headers: { 'Content-Type': 'application/json' },
+        body: "invalid_token"
+      };
       return;
     }
 
     const { flag } = req.body || {};
     if (!flag) {
-      context.res = { status: 400, body: { error: "missing flag" } };
+      context.res = { 
+        status: 400, 
+        headers: { 'Content-Type': 'application/json' },
+        body: "missing flag"
+      };
       return;
     }
 
@@ -104,27 +124,43 @@ module.exports = async function (context, req) {
 
     const user = usersObj.users.find((u) => u.username === username);
     if (!user) {
-      context.res = { status: 404, body: { error: "user_not_found" } };
+      context.res = { 
+        status: 404, 
+        headers: { 'Content-Type': 'application/json' },
+        body: "user_not_found"
+      };
       return;
     }
 
     // find matching flag by exact string match
     const flagEntry = flagsObj.flags.find((f) => f.flag === flag);
     if (!flagEntry) {
-      context.res = { status: 400, body: { error: "incorrect_flag" } };
+      context.res = { 
+        status: 400, 
+        headers: { 'Content-Type': 'application/json' },
+        body: "incorrect_flag"
+      };
       return;
     }
 
     // Check already claimed
     if (flagEntry.claimedBy) {
-      context.res = { status: 400, body: { error: "flag_already_claimed" } };
+      context.res = { 
+        status: 400, 
+        headers: { 'Content-Type': 'application/json' },
+        body: "flag_already_claimed"
+      };
       return;
     }
 
-    // Prevent user claiming same flag twice (extra safety - user may have claimed before if data got out-of-sync)
+    // Prevent user claiming same flag twice (extra safety)
     user.claimedFlags = user.claimedFlags || [];
     if (user.claimedFlags.includes(flagEntry.id)) {
-      context.res = { status: 400, body: { error: "already_claimed_by_user" } };
+      context.res = { 
+        status: 400, 
+        headers: { 'Content-Type': 'application/json' },
+        body: "already_claimed_by_user"
+      };
       return;
     }
 
@@ -141,9 +177,17 @@ module.exports = async function (context, req) {
     await writeJsonBlob(containerClient, USERS_BLOB, usersObj);
     await writeJsonBlob(containerClient, FLAGS_BLOB, flagsObj);
 
-    context.res = { status: 200, body: { message: "ok", awarded: points } };
+    context.res = { 
+      status: 200, 
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ message: "ok", awarded: points })
+    };
   } catch (err) {
     context.log.error(err);
-    context.res = { status: 500, body: { error: "internal_error" } };
+    context.res = { 
+      status: 500, 
+      headers: { 'Content-Type': 'application/json' },
+      body: "internal_error"
+    };
   }
 };

@@ -28,7 +28,6 @@ async function readJsonBlob(containerClient, blobName, defaultObj) {
     const downloaded = await streamToBuffer(downloadBlockBlobResponse.readableStreamBody);
     return JSON.parse(downloaded.toString());
   } catch (err) {
-    // If anything goes wrong, initialize the blob
     await blobClient.uploadData(Buffer.from(JSON.stringify(defaultObj, null, 2)), {
       blobHTTPHeaders: { blobContentType: "application/json" },
     });
@@ -59,7 +58,11 @@ module.exports = async function (context, req) {
     const { username, password } = req.body || {};
 
     if (!username || !password) {
-      context.res = { status: 400, body: { error: "missing username or password" } };
+      context.res = { 
+        status: 400, 
+        headers: { 'Content-Type': 'application/json' },
+        body: "missing username or password"
+      };
       return;
     }
 
@@ -68,7 +71,11 @@ module.exports = async function (context, req) {
 
     const existing = usersObj.users.find((u) => u.username === username);
     if (existing) {
-      context.res = { status: 409, body: { error: "username exists" } };
+      context.res = { 
+        status: 409, 
+        headers: { 'Content-Type': 'application/json' },
+        body: "username exists"
+      };
       return;
     }
 
@@ -79,9 +86,17 @@ module.exports = async function (context, req) {
 
     await writeJsonBlob(containerClient, USERS_BLOB, usersObj);
 
-    context.res = { status: 201, body: { message: "ok" } };
+    context.res = { 
+      status: 201, 
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ message: "ok" })
+    };
   } catch (err) {
     context.log.error(err);
-    context.res = { status: 500, body: { error: "internal_error" } };
+    context.res = { 
+      status: 500, 
+      headers: { 'Content-Type': 'application/json' },
+      body: "internal_error"
+    };
   }
 };
