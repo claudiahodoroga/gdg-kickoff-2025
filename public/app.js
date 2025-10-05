@@ -1,5 +1,8 @@
 let jwtToken = null;
 
+// Use dedicated Function App URL
+const API_BASE_URL = 'kickoffapi-b9gabefrbsc5bre5.italynorth-01.azurewebsites.net';
+
 function escapeHTML(str) {
   return str.replace(/[&<>'"]/g, c => ({
     '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'
@@ -120,4 +123,4 @@ document.getElementById('flagForm').addEventListener('submit', async e => {
     scoreboardMessage.textContent = "Error: " + err.message;
     scoreboardMessage.className = "error";
   }
-});
+}); 
