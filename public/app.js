@@ -12,6 +12,43 @@ function escapeHTML(str) {
 const messageDiv = document.getElementById('message');
 const scoreboardMessage = document.getElementById('scoreboardMessage');
 
+// Session management functions
+function saveSession(token) {
+  sessionStorage.setItem('jwtToken', token);
+  jwtToken = token;
+}
+
+function loadSession() {
+  const token = sessionStorage.getItem('jwtToken');
+  if (token) {
+    jwtToken = token;
+    // Verify token is still valid by trying to load scoreboard
+    fetch(`${API_BASE_URL}/scoreboard`)
+      .then(res => {
+        if (res.ok) {
+          document.getElementById('landingView').style.display = 'none';
+          document.getElementById('scoreboardView').style.display = 'block';
+          loadScoreboard();
+        } else {
+          clearSession();
+        }
+      })
+      .catch(() => clearSession());
+  }
+}
+
+function clearSession() {
+  sessionStorage.removeItem('jwtToken');
+  jwtToken = null;
+  document.getElementById('landingView').style.display = 'block';
+  document.getElementById('scoreboardView').style.display = 'none';
+}
+
+// Load session on page load
+document.addEventListener('DOMContentLoaded', () => {
+  loadSession();
+});
+
 document.getElementById('registerForm').addEventListener('submit', async e => {
   e.preventDefault();
   const username = document.getElementById('registerUsername').value.trim();
@@ -55,7 +92,7 @@ document.getElementById('loginForm').addEventListener('submit', async e => {
     });
     if (res.ok) {
       const data = await res.json();
-      jwtToken = data.token;
+      saveSession(data.token);
       document.getElementById('landingView').style.display = 'none';
       document.getElementById('scoreboardView').style.display = 'block';
       loadScoreboard();
@@ -124,3 +161,13 @@ document.getElementById('flagForm').addEventListener('submit', async e => {
     scoreboardMessage.className = "error";
   }
 });
+
+// Optional: Add logout functionality
+// Add this to your HTML if you want a logout button:
+// <button id="logoutBtn">Logout</button>
+const logoutBtn = document.getElementById('logoutBtn');
+if (logoutBtn) {
+  logoutBtn.addEventListener('click', () => {
+    clearSession();
+  });
+}
