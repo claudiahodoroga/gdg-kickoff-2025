@@ -1,17 +1,14 @@
 {
-  "name": "ctf-portal",
+  "name": "gdg-kickoff-2025-api",
   "version": "1.0.0",
-  "description": "CTF Portal with Azure Functions",
+  "description": "CTF API Functions",
   "scripts": {
     "start": "func start",
-    "test": "echo \"No tests yet...\""
+    "test": "echo \"No tests yet\""
   },
   "dependencies": {
-    "@azure/functions": "^4.0.0",
     "@azure/storage-blob": "^12.17.0",
     "jsonwebtoken": "^9.0.2"
   },
-  "devDependencies": {
-    "azure-functions-core-tools": "^4.x"
-  }
+  "devDependencies": {}
 }
