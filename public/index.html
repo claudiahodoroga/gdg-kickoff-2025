@@ -2,50 +2,146 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>CTF Portal</title>
-  <link rel="stylesheet" href="style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="GDG Kickoff 2025 CTF Challenge">
+  <!-- FLAG{always_check_the_source} -->
+  <title>GDG Kickoff CTF 2025</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <div class="container">
-    <!-- Landing Page -->
-    <div id="landingView">
-      <h2>Register</h2>
-      <form id="registerForm">
-        <input type="text" id="registerUsername" placeholder="Username" required>
-        <input type="password" id="registerPassword" placeholder="Password" required>
-        <button type="submit">Register</button>
-      </form>
-
-      <h2>Login</h2>
-      <form id="loginForm">
-        <input type="text" id="loginUsername" placeholder="Username" required>
-        <input type="password" id="loginPassword" placeholder="Password" required>
-        <button type="submit">Login</button>
-      </form>
-
-      <div id="message"></div>
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1 class="hero-title">
+        Welcome to <span class="text-blue">GDG Kickoff</span><br>
+        Capture The Flag 2025
+      </h1>
+      <p class="hero-subtitle">
+        Test your skills in this 60-minute beginner-friendly cybersecurity challenge.
+        Find hidden flags, earn points, and climb the leaderboard!
+      </p>
+      <div class="hero-stats">
+        <div class="stat-card">
+          <div class="stat-number">6</div>
+          <div class="stat-label">Challenges</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">60</div>
+          <div class="stat-label">Minutes</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">600</div>
+          <div class="stat-label">Max Points</div>
+        </div>
+      </div>
     </div>
+  </section>
 
-    <!-- Scoreboard Page -->
-    <div id="scoreboardView">
-      <h2>Scoreboard</h2>
-      <table id="scoreboardTable">
-        <thead>
-          <tr><th>Position</th><th>Name</th><th>Score</th></tr>
-        </thead>
-        <tbody></tbody>
-      </table>
+  <!-- Auth Forms -->
+  <section class="auth-section">
+    <div class="auth-container">
+      <!-- Register Form -->
+      <div class="auth-card" id="registerCard">
+        <h2 class="auth-title">Create Account</h2>
+        <p class="auth-description">Register to start your CTF journey</p>
+        <form id="registerForm" class="auth-form">
+          <div class="form-group">
+            <label for="registerUsername">Username</label>
+            <input 
+              type="text" 
+              id="registerUsername" 
+              placeholder="Choose a username" 
+              required
+              autocomplete="username"
+            >
+          </div>
+          <div class="form-group">
+            <label for="registerPassword">Password</label>
+            <input 
+              type="password" 
+              id="registerPassword" 
+              placeholder="Create a password" 
+              required
+              autocomplete="new-password"
+            >
+          </div>
+          <button type="submit" class="btn-primary">Register</button>
+        </form>
+        <p class="auth-switch">
+          Already have an account? 
+          <a href="#" id="showLogin">Login here</a>
+        </p>
+      </div>
 
-      <h3>Submit Flag</h3>
-      <form id="flagForm">
-        <input type="text" id="flagInput" placeholder="Enter flag" required>
-        <button type="submit">Submit Flag</button>
-      </form>
+      <!-- Login Form -->
+      <div class="auth-card" id="loginCard" style="display: none;">
+        <h2 class="auth-title">Welcome Back</h2>
+        <p class="auth-description">Login to continue your challenge</p>
+        <form id="loginForm" class="auth-form">
+          <div class="form-group">
+            <label for="loginUsername">Username</label>
+            <input 
+              type="text" 
+              id="loginUsername" 
+              placeholder="Enter your username" 
+              required
+              autocomplete="username"
+            >
+          </div>
+          <div class="form-group">
+            <label for="loginPassword">Password</label>
+            <input 
+              type="password" 
+              id="loginPassword" 
+              placeholder="Enter your password" 
+              required
+              autocomplete="current-password"
+            >
+          </div>
+          <button type="submit" class="btn-primary">Login</button>
+        </form>
+        <p class="auth-switch">
+          Don't have an account? 
+          <a href="#" id="showRegister">Register here</a>
+        </p>
+      </div>
 
-      <div id="scoreboardMessage"></div>
+      <!-- Message Display -->
+      <div id="message" class="message"></div>
     </div>
-    <button id="logoutBtn">Logout</button>
-  </div>
+  </section>
+
+  <!-- Info Section -->
+  <section class="info-section">
+    <div class="info-container">
+      <h2 class="section-title">How to Play</h2>
+      <div class="info-grid">
+        <div class="info-card">
+          <div class="info-icon">🔍</div>
+          <h3>Explore</h3>
+          <p>Navigate through the website and use browser developer tools to find hidden flags</p>
+        </div>
+        <div class="info-card">
+          <div class="info-icon">🚩</div>
+          <h3>Capture</h3>
+          <p>Flags follow the format FLAG{text_here}. Submit them to earn points</p>
+        </div>
+        <div class="info-card">
+          <div class="info-icon">🏆</div>
+          <h3>Compete</h3>
+          <p>Climb the leaderboard and compete with other participants for the top spot</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p>&copy; 2025 Google Developer Groups. All rights reserved.</p>
+  </footer>
 
   <script src="app.js"></script>
 </body>

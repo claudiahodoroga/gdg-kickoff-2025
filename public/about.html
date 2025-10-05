@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About GDG - GDG CTF 2025</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Navigation -->
+  <nav id="mainNav">
+    <div class="nav-container">
+      <div class="nav-logo">
+        <span class="logo-text">GDG <span class="logo-highlight">CTF</span></span>
+      </div>
+      <button class="nav-toggle" id="navToggle">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="dashboard.html">Dashboard</a></li>
+        <li><a href="about.html" class="active">About GDG</a></li>
+        <li><a href="events.html">Events</a></li>
+        <li><button id="navLogout" class="btn-logout">Logout</button></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <div class="content-container">
+      <!-- Hero Section -->
+      <section class="about-hero">
+        <h1 class="page-title">About Google Developer Groups</h1>
+        <p class="page-subtitle">
+          Connecting developers, fostering innovation, and building community
+        </p>
+      </section>
+
+      <!-- FLAG{welcome_to_gdg_ctf} - Hidden in HTML comment -->
+      
+      <!-- Mission Section -->
+      <section class="about-section">
+        <div class="about-card">
+          <h2 class="section-title">Our Mission</h2>
+          <p class="about-text">
+            Google Developer Groups (GDG) are community groups for college and university students 
+            interested in Google developer technologies. Students from all undergraduate or graduate 
+            programs with an interest in growing as a developer are welcome.
+          </p>
+          <p class="about-text">
+            By joining a GDG, students grow their knowledge in a peer-to-peer learning environment 
+            and build solutions for local businesses and their community. GDG activities vary from 
+            technical hands-on workshops, hackathons, and coding competitions to social events and 
+            networking opportunities.
+          </p>
+        </div>
+      </section>
+
+      <!-- Team Section -->
+      <section class="team-section">
+        <h2 class="section-title">Our Leadership Team</h2>
+        <div class="team-grid">
+          <div class="team-card">
+            <div class="team-avatar">
+              <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Crect fill='%233285F5' width='120' height='120'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-size='48' fill='white' font-family='Arial'%3EAS%3C/text%3E%3C/svg%3E" 
+                   alt="FLAG{inspect_element_is_your_friend}">
+            </div>
+            <h3 class="team-name">Alex Smith</h3>
+            <p class="team-role">Lead Organizer</p>
+            <p class="team-bio">Passionate about cloud technologies and community building</p>
+          </div>
+
+          <div class="team-card">
+            <div class="team-avatar">
+              <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Crect fill='%2357CAFF' width='120' height='120'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-size='48' fill='white' font-family='Arial'%3EJD%3C/text%3E%3C/svg%3E" 
+                   alt="Profile photo of Jordan Davis">
+            </div>
+            <h3 class="team-name">Jordan Davis</h3>
+            <p class="team-role">Tech Lead</p>
+            <p class="team-bio">Full-stack developer focused on web technologies and AI</p>
+          </div>
+
+          <div class="team-card">
+            <div class="team-avatar">
+              <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Crect fill='%23F9AB00' width='120' height='120'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-size='48' fill='white' font-family='Arial'%3EMP%3C/text%3E%3C/svg%3E" 
+                   alt="Profile photo of Maria Perez">
+            </div>
+            <h3 class="team-name">Maria Perez</h3>
+            <p class="team-role">Community Manager</p>
+            <p class="team-bio">Building bridges between students and industry professionals</p>
+          </div>
+
+          <div class="team-card">
+            <div class="team-avatar">
+              <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Crect fill='%23EA4335' width='120' height='120'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-size='48' fill='white' font-family='Arial'%3ERC%3C/text%3E%3C/svg%3E" 
+                   alt="Profile photo of Ryan Chen">
+            </div>
+            <h3 class="team-name">Ryan Chen</h3>
+            <p class="team-role">Event Coordinator</p>
+            <p class="team-bio">Creating memorable experiences and learning opportunities</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Activities Section -->
+      <section class="activities-section">
+        <h2 class="section-title">What We Do</h2>
+        <div class="activities-grid">
+          <div class="activity-card">
+            <div class="activity-icon">💻</div>
+            <h3>Technical Workshops</h3>
+            <p>Hands-on learning sessions covering the latest Google technologies and development tools</p>
+          </div>
+          <div class="activity-card">
+            <div class="activity-icon">🚀</div>
+            <h3>Hackathons</h3>
+            <p>Build innovative solutions to real-world problems in collaborative 24-hour coding marathons</p>
+          </div>
+          <div class="activity-card">
+            <div class="activity-icon">🎤</div>
+            <h3>Tech Talks</h3>
+            <p>Learn from industry experts and Google Developer Experts through engaging presentations</p>
+          </div>
+          <div class="activity-card">
+            <div class="activity-icon">🤝</div>
+            <h3>Networking Events</h3>
+            <p>Connect with fellow developers, share ideas, and build lasting professional relationships</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Technologies Section -->
+      <section class="tech-section">
+        <h2 class="section-title">Technologies We Explore</h2>
+        <div class="tech-tags">
+          <span class="tech-tag">Android</span>
+          <span class="tech-tag">Flutter</span>
+          <span class="tech-tag">Firebase</span>
+          <span class="tech-tag">Google Cloud</span>
+          <span class="tech-tag">TensorFlow</span>
+          <span class="tech-tag">Angular</span>
+          <span class="tech-tag">Kubernetes</span>
+          <span class="tech-tag">Web Development</span>
+          <span class="tech-tag">Machine Learning</span>
+          <span class="tech-tag">Cloud Computing</span>
+        </div>
+      </section>
+
+      <!-- Contact Section -->
+      <section class="contact-section">
+        <div class="contact-card">
+          <h2 class="section-title">Get In Touch</h2>
+          <div class="contact-info">
+            <div class="contact-item">
+              <strong>Email:</strong> 
+              <a href="mailto:gdg@university.edu">gdg@university.edu</a>
+            </div>
+            <div class="contact-item">
+              <strong>Location:</strong> 
+              Student Union Building, Room 301
+            </div>
+            <div class="contact-item">
+              <strong>Meeting Time:</strong> 
+              Every Wednesday, 6:00 PM - 8:00 PM
+            </div>
+          </div>
+          <div class="social-links">
+            <a href="#" class="social-link">Twitter</a>
+            <a href="#" class="social-link">LinkedIn</a>
+            <a href="#" class="social-link">GitHub</a>
+            <a href="#" class="social-link">Discord</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- Hidden element for CSS inspection flag -->
+      <div class="secret-message" data-flag="FLAG{hidden_in_plain_sight}">
+        This element is hidden but contains a flag in its data attribute!
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p>&copy; 2025 Google Developer Groups. All rights reserved.</p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Events - GDG CTF 2025</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Navigation -->
+  <nav id="mainNav">
+    <div class="nav-container">
+      <div class="nav-logo">
+        <span class="logo-text">GDG <span class="logo-highlight">CTF</span></span>
+      </div>
+      <button class="nav-toggle" id="navToggle">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="dashboard.html">Dashboard</a></li>
+        <li><a href="about.html">About GDG</a></li>
+        <li><a href="events.html" class="active">Events</a></li>
+        <li><button id="navLogout" class="btn-logout">Logout</button></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <div class="content-container">
+      <!-- Hero Section -->
+      <section class="events-hero">
+        <h1 class="page-title">Upcoming Events</h1>
+        <p class="page-subtitle">
+          Join us for exciting workshops, talks, and networking opportunities
+        </p>
+      </section>
+
+      <!-- Events Grid -->
+      <section class="events-section">
+        <div class="events-grid">
+          <!-- Event Card 1 -->
+          <div class="event-card featured">
+            <div class="event-badge">Featured</div>
+            <div class="event-date">
+              <span class="date-day">15</span>
+              <span class="date-month">OCT</span>
+            </div>
+            <div class="event-content">
+              <h3 class="event-title">Introduction to Cloud Computing</h3>
+              <p class="event-description">
+                Learn the fundamentals of cloud computing with Google Cloud Platform. 
+                Perfect for beginners looking to understand cloud architecture.
+              </p>
+              <div class="event-meta">
+                <span class="event-time">⏰ 6:00 PM - 8:00 PM</span>
+                <span class="event-location">📍 Tech Hub Room 201</span>
+              </div>
+              <button class="btn-event">Register Now</button>
+            </div>
+          </div>
+
+          <!-- Event Card 2 -->
+          <div class="event-card">
+            <div class="event-date">
+              <span class="date-day">22</span>
+              <span class="date-month">OCT</span>
+            </div>
+            <div class="event-content">
+              <h3 class="event-title">Android Development Workshop</h3>
+              <p class="event-description">
+                Build your first Android app using Kotlin and Android Studio. 
+                Hands-on session with live coding and Q&A.
+              </p>
+              <div class="event-meta">
+                <span class="event-time">⏰ 2:00 PM - 5:00 PM</span>
+                <span class="event-location">📍 Computer Lab B</span>
+              </div>
+              <button class="btn-event">Register Now</button>
+            </div>
+          </div>
+
+          <!-- Event Card 3 -->
+          <div class="event-card">
+            <div class="event-date">
+              <span class="date-day">29</span>
+              <span class="date-month">OCT</span>
+            </div>
+            <div class="event-content">
+              <h3 class="event-title">Machine Learning Basics</h3>
+              <p class="event-description">
+                Introduction to machine learning concepts and TensorFlow. 
+                Learn how to build and train your first ML model.
+              </p>
+              <div class="event-meta">
+                <span class="event-time">⏰ 4:00 PM - 6:00 PM</span>
+                <span class="event-location">📍 Online via Meet</span>
+              </div>
+              <button class="btn-event">Register Now</button>
+            </div>
+          </div>
+
+          <!-- Event Card 4 -->
+          <div class="event-card">
+            <div class="event-date">
+              <span class="date-day">05</span>
+              <span class="date-month">NOV</span>
+            </div>
+            <div class="event-content">
+              <h3 class="event-title">Web Development Bootcamp</h3>
+              <p class="event-description">
+                Master modern web development with HTML, CSS, JavaScript, and Firebase. 
+                Build and deploy a real-world web application.
+              </p>
+              <div class="event-meta">
+                <span class="event-time">⏰ 10:00 AM - 4:00 PM</span>
+                <span class="event-location">📍 Innovation Center</span>
+              </div>
+              <button class="btn-event">Register Now</button>
+            </div>
+          </div>
+
+          <!-- Event Card 5 -->
+          <div class="event-card">
+            <div class="event-date">
+              <span class="date-day">12</span>
+              <span class="date-month">NOV</span>
+            </div>
+            <div class="event-content">
+              <h3 class="event-title">Tech Career Panel</h3>
+              <p class="event-description">
+                Meet industry professionals from Google, Microsoft, and startups. 
+                Get insights on career paths, interview tips, and networking.
+              </p>
+              <div class="event-meta">
+                <span class="event-time">⏰ 7:00 PM - 9:00 PM</span>
+                <span class="event-location">📍 Auditorium Main Hall</span>
+              </div>
+              <button class="btn-event">Register Now</button>
+            </div>
+          </div>
+
+          <!-- Event Card 6 -->
+          <div class="event-card">
+            <div class="event-badge">Hackathon</div>
+            <div class="event-date">
+              <span class="date-day">19</span>
+              <span class="date-month">NOV</span>
+            </div>
+            <div class="event-content">
+              <h3 class="event-title">GDG Hackathon 2025</h3>
+              <p class="event-description">
+                24-hour hackathon to build innovative solutions for real-world problems. 
+                Form teams, code together, and win amazing prizes!
+              </p>
+              <div class="event-meta">
+                <span class="event-time">⏰ 9:00 AM (Sat) - 9:00 AM (Sun)</span>
+                <span class="event-location">📍 Student Center</span>
+              </div>
+              <button class="btn-event">Register Now</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Past Events Gallery -->
+      <section class="gallery-section">
+        <h2 class="section-title">Past Events Highlights</h2>
+        <div class="gallery-grid">
+          <div class="gallery-item">
+            <div class="gallery-image" style="background: linear-gradient(135deg, #3285F5 0%, #57CAFF 100%);">
+              <span class="gallery-placeholder">Workshop Session</span>
+            </div>
+            <p class="gallery-caption">Cloud Computing Workshop - September 2025</p>
+          </div>
+          <div class="gallery-item">
+            <div class="gallery-image" style="background: linear-gradient(135deg, #F9AB00 0%, #EA4335 100%);">
+              <span class="gallery-placeholder">Networking Event</span>
+            </div>
+            <p class="gallery-caption">Tech Meetup & Networking - August 2025</p>
+          </div>
+          <div class="gallery-item">
+            <div class="gallery-image" style="background: linear-gradient(135deg, #57CAFF 0%, #C3ECF6 100%);">
+              <span class="gallery-placeholder">Hackathon Team</span>
+            </div>
+            <p class="gallery-caption">Summer Hackathon Winners - July 2025</p>
+          </div>
+          <div class="gallery-item">
+            <div class="gallery-image" style="background: linear-gradient(135deg, #EA4335 0%, #F9AB00 100%);">
+              <span class="gallery-placeholder">Speaker Session</span>
+            </div>
+            <p class="gallery-caption">Guest Speaker from Google - June 2025</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- CTA Section -->
+      <section class="cta-section">
+        <div class="cta-card">
+          <h2>Want to stay updated?</h2>
+          <p>Join our mailing list to receive event notifications and exclusive content</p>
+          <form class="subscribe-form" id="subscribeForm">
+            <input type="email" placeholder="Enter your email" required>
+            <button type="submit" class="btn-subscribe">Subscribe</button>
+          </form>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p>&copy; 2025 Google Developer Groups. All rights reserved.</p>
+  </footer>
+
+  <script src="app.js"></script>
+  <script>
+    // Network flag - this endpoint doesn't exist but will be visible in Network tab
+    fetch('/api/secret-data')
+      .then(res => res.json())
+      .catch(err => {
+        // The flag is in the request attempt itself
+        console.log('Checking secret endpoint...');
+      });
+
+    // Add custom header with flag (visible in Network tab when any request is made)
+    document.addEventListener('DOMContentLoaded', () => {
+      const originalFetch = window.fetch;
+      window.fetch = function(...args) {
+        const [url, config = {}] = args;
+        config.headers = config.headers || {};
+        config.headers['X-Secret-Flag'] = 'FLAG{network_requests_reveal_secrets}';
+        return originalFetch(url, config);
+      };
+    });
+
+    // Subscribe form handler
+    document.getElementById('subscribeForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      alert('Thanks for subscribing! Check your email for confirmation.');
+      e.target.reset();
+    });
+  </script>
+</body>
+</html>

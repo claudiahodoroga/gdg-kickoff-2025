@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard - GDG CTF 2025</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Navigation -->
+  <nav id="mainNav">
+    <div class="nav-container">
+      <div class="nav-logo">
+        <span class="logo-text">GDG <span class="logo-highlight">CTF</span></span>
+      </div>
+      <button class="nav-toggle" id="navToggle">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="dashboard.html" class="active">Dashboard</a></li>
+        <li><a href="about.html">About GDG</a></li>
+        <li><a href="events.html">Events</a></li>
+        <li><button id="navLogout" class="btn-logout">Logout</button></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <div class="content-container">
+      <!-- Welcome Header -->
+      <section class="dashboard-header">
+        <h1 class="page-title">Dashboard</h1>
+        <p class="page-subtitle" id="welcomeMessage">Welcome back, hacker! 🚀</p>
+      </section>
+
+      <!-- Flag Submission -->
+      <section class="submission-section">
+        <div class="submission-card">
+          <h2 class="card-title">Submit Flag</h2>
+          <p class="card-description">Found a flag? Submit it here to earn points!</p>
+          <form id="flagForm" class="flag-form">
+            <div class="flag-input-group">
+              <input 
+                type="text" 
+                id="flagInput" 
+                placeholder="FLAG{enter_your_flag_here}" 
+                required
+                pattern="FLAG\{.*\}"
+              >
+              <button type="submit" class="btn-submit">Submit</button>
+            </div>
+            <small class="input-hint">Format: FLAG{text_here}</small>
+          </form>
+          <div id="scoreboardMessage" class="message"></div>
+        </div>
+      </section>
+
+      <!-- Scoreboard -->
+      <section class="scoreboard-section">
+        <div class="scoreboard-card">
+          <div class="card-header">
+            <h2 class="card-title">Leaderboard</h2>
+            <button id="refreshBtn" class="btn-refresh" title="Refresh scoreboard">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="23 4 23 10 17 10"></polyline>
+                <polyline points="1 20 1 14 7 14"></polyline>
+                <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path>
+              </svg>
+            </button>
+          </div>
+          <div class="table-container">
+            <table id="scoreboardTable">
+              <thead>
+                <tr>
+                  <th>Rank</th>
+                  <th>Player</th>
+                  <th>Score</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td colspan="3" class="loading-cell">Loading scoreboard...</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- Tips Section -->
+      <section class="tips-section">
+        <div class="tips-card">
+          <h3 class="card-title">Hunting Tips</h3>
+          <ul class="tips-list">
+            <li><strong>Inspect Elements:</strong> Right-click and use "Inspect" to view HTML</li>
+            <li><strong>View Source:</strong> Press Ctrl+U (Cmd+Option+U on Mac) to see raw HTML</li>
+            <li><strong>Console:</strong> Press F12 and check the Console tab for hidden messages</li>
+            <li><strong>Network Tab:</strong> Monitor API requests and responses</li>
+            <li><strong>Images:</strong> Check image alt text and metadata</li>
+            <li><strong>CSS:</strong> Inspect styles for hidden elements</li>
+          </ul>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p>&copy; 2025 Google Developer Groups. All rights reserved.</p>
+  </footer>
+
+  <script src="app.js"></script>
+  <script>
+    // Console flag for beginners
+    console.log('%c🚩 FLAG FOUND! 🚩', 'color: #3285F5; font-size: 20px; font-weight: bold;');
+    console.log('%cCongratulations! You checked the console!', 'color: #57CAFF; font-size: 14px;');
+    console.log('%cHere is your flag: FLAG{console_log_detective}', 'color: #F9AB00; font-size: 16px; font-weight: bold;');
+  </script>
+</body>
+</html>
