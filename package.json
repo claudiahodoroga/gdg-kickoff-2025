@@ -1,12 +1,14 @@
 {
-  "name": "gdg-kickoff-2025",
+  "name": "gdg-kickoff-2025-api",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "CTF API Functions",
   "scripts": {
-  "test": "echo \"No tests yet\""
-},
-  "keywords": [],
-  "author": "",
-  "license": "ISC"
+    "start": "func start",
+    "test": "echo \"No tests yet\""
+  },
+  "dependencies": {
+    "@azure/storage-blob": "^12.17.0",
+    "jsonwebtoken": "^9.0.2"
+  },
+  "devDependencies": {}
 }
