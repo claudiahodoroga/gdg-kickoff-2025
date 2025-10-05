@@ -1,14 +1,15 @@
 {
-  "name": "",
+  "name": "ctf-portal",
   "version": "1.0.0",
-  "description": "",
-  "main": "src/functions/*.js",
+  "description": "CTF Portal with Azure Functions",
   "scripts": {
     "start": "func start",
     "test": "echo \"No tests yet...\""
   },
   "dependencies": {
-    "@azure/functions": "^4.0.0"
+    "@azure/functions": "^4.0.0",
+    "@azure/storage-blob": "^12.17.0",
+    "jsonwebtoken": "^9.0.2"
   },
   "devDependencies": {
     "azure-functions-core-tools": "^4.x"

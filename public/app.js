@@ -1,7 +1,7 @@
 let jwtToken = null;
 
 // Use dedicated Function App URL
-const API_BASE_URL = 'kickoffapi-b9gabefrbsc5bre5.italynorth-01.azurewebsites.net';
+const API_BASE_URL = 'https://kickoffapi-b9gabefrbsc5bre5.italynorth-01.azurewebsites.net/api';
 
 function escapeHTML(str) {
   return str.replace(/[&<>'"]/g, c => ({
@@ -17,7 +17,7 @@ document.getElementById('registerForm').addEventListener('submit', async e => {
   const username = document.getElementById('registerUsername').value.trim();
   const password = document.getElementById('registerPassword').value.trim();
   try {
-    const res = await fetch('/api/register', {
+    const res = await fetch(`${API_BASE_URL}/register`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ username, password })
@@ -48,7 +48,7 @@ document.getElementById('loginForm').addEventListener('submit', async e => {
   const username = document.getElementById('loginUsername').value.trim();
   const password = document.getElementById('loginPassword').value.trim();
   try {
-    const res = await fetch('/api/login', {
+    const res = await fetch(`${API_BASE_URL}/login`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ username, password })
@@ -72,7 +72,7 @@ document.getElementById('loginForm').addEventListener('submit', async e => {
 
 async function loadScoreboard() {
   try {
-    const res = await fetch('/api/scoreboard');
+    const res = await fetch(`${API_BASE_URL}/scoreboard`);
     if (res.ok) {
       const data = await res.json();
       const tbody = document.querySelector('#scoreboardTable tbody');
@@ -101,7 +101,7 @@ document.getElementById('flagForm').addEventListener('submit', async e => {
   e.preventDefault();
   const flag = document.getElementById('flagInput').value.trim();
   try {
-    const res = await fetch('/api/submitFlag', {
+    const res = await fetch(`${API_BASE_URL}/submitFlag`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -123,4 +123,4 @@ document.getElementById('flagForm').addEventListener('submit', async e => {
     scoreboardMessage.textContent = "Error: " + err.message;
     scoreboardMessage.className = "error";
   }
-}); 
+});

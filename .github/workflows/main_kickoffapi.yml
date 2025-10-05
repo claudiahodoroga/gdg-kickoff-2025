@@ -37,6 +37,13 @@ jobs:
           npm run test --if-present
           popd
 
+      - name: Zip artifact for deployment
+        shell: pwsh
+        run: |
+          pushd './${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}'
+          if (Test-Path node_modules) { Remove-Item -Recurse -Force node_modules }
+          popd
+
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
         with:
