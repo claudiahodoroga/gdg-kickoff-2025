@@ -14,22 +14,32 @@ async function getContainerClient() {
 }
 
 async function readJsonBlob(containerClient, blobName, defaultObj) {
-  const blobClient = containerClient.getBlobClient(blobName);
+  const blockBlobClient = containerClient.getBlockBlobClient(blobName);
   try {
-    const exists = await blobClient.exists();
+    const exists = await blockBlobClient.exists();
     if (!exists) {
-      await blobClient.uploadData(Buffer.from(JSON.stringify(defaultObj, null, 2)), {
-        blobHTTPHeaders: { blobContentType: "application/json" },
-      });
+      const data = JSON.stringify(defaultObj, null, 2);
+      await blockBlobClient.upload(
+        data,
+        Buffer.byteLength(data),
+        {
+          blobHTTPHeaders: { blobContentType: "application/json" }
+        }
+      );
       return defaultObj;
     }
-    const downloadBlockBlobResponse = await blobClient.download();
+    const downloadBlockBlobResponse = await blockBlobClient.download();
     const downloaded = await streamToBuffer(downloadBlockBlobResponse.readableStreamBody);
     return JSON.parse(downloaded.toString());
   } catch (err) {
-    await blobClient.uploadData(Buffer.from(JSON.stringify(defaultObj, null, 2)), {
-      blobHTTPHeaders: { blobContentType: "application/json" },
-    });
+    const data = JSON.stringify(defaultObj, null, 2);
+    await blockBlobClient.upload(
+      data,
+      Buffer.byteLength(data),
+      {
+        blobHTTPHeaders: { blobContentType: "application/json" }
+      }
+    );
     return defaultObj;
   }
 }
@@ -44,24 +54,25 @@ async function streamToBuffer(readable) {
 }
 
 module.exports = async function (context, req) {
-  context.log("scoreboard endpoint hit");
+  context.log("Scoreboard endpoint hit");
   try {
     const containerClient = await getContainerClient();
     const usersObj = await readJsonBlob(containerClient, USERS_BLOB, { users: [] });
 
-    const results = (usersObj.users || [])
-      .map((u) => ({ username: u.username, score: Number(u.score || 0) }))
+    // Sort by score descending
+    const sorted = usersObj.users
+      .map(u => ({ username: u.username, score: u.score }))
       .sort((a, b) => b.score - a.score);
 
-    context.res = { 
-      status: 200, 
+    context.res = {
+      status: 200,
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(results)
+      body: JSON.stringify(sorted)
     };
   } catch (err) {
     context.log.error(err);
-    context.res = { 
-      status: 500, 
+    context.res = {
+      status: 500,
       headers: { 'Content-Type': 'application/json' },
       body: "internal_error"
     };

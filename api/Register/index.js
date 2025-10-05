@@ -15,32 +15,46 @@ async function getContainerClient() {
 }
 
 async function readJsonBlob(containerClient, blobName, defaultObj) {
-  const blobClient = containerClient.getBlobClient(blobName);
+  const blockBlobClient = containerClient.getBlockBlobClient(blobName);
   try {
-    const exists = await blobClient.exists();
+    const exists = await blockBlobClient.exists();
     if (!exists) {
-      await blobClient.uploadData(Buffer.from(JSON.stringify(defaultObj, null, 2)), {
-        blobHTTPHeaders: { blobContentType: "application/json" },
-      });
+      await blockBlobClient.upload(
+        JSON.stringify(defaultObj, null, 2),
+        Buffer.byteLength(JSON.stringify(defaultObj, null, 2)),
+        {
+          blobHTTPHeaders: { blobContentType: "application/json" }
+        }
+      );
       return defaultObj;
     }
-    const downloadBlockBlobResponse = await blobClient.download();
+    const downloadBlockBlobResponse = await blockBlobClient.download();
     const downloaded = await streamToBuffer(downloadBlockBlobResponse.readableStreamBody);
     return JSON.parse(downloaded.toString());
   } catch (err) {
-    await blobClient.uploadData(Buffer.from(JSON.stringify(defaultObj, null, 2)), {
-      blobHTTPHeaders: { blobContentType: "application/json" },
-    });
+    const data = JSON.stringify(defaultObj, null, 2);
+    await blockBlobClient.upload(
+      data,
+      Buffer.byteLength(data),
+      {
+        blobHTTPHeaders: { blobContentType: "application/json" }
+      }
+    );
     return defaultObj;
   }
 }
 
 async function writeJsonBlob(containerClient, blobName, obj) {
-  const blobClient = containerClient.getBlobClient(blobName);
-  await blobClient.uploadData(Buffer.from(JSON.stringify(obj, null, 2)), {
-    blobHTTPHeaders: { blobContentType: "application/json" },
-    overwrite: true,
-  });
+  const blockBlobClient = containerClient.getBlockBlobClient(blobName);
+  const data = JSON.stringify(obj, null, 2);
+  await blockBlobClient.upload(
+    data,
+    Buffer.byteLength(data),
+    {
+      blobHTTPHeaders: { blobContentType: "application/json" },
+      overwrite: true
+    }
+  );
 }
 
 async function streamToBuffer(readable) {
