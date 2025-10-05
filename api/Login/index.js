@@ -2,13 +2,13 @@ const { BlobServiceClient } = require("@azure/storage-blob");
 const crypto = require("crypto");
 const jwt = require("jsonwebtoken");
 
-const AZURE_CONN = process.env.AZURE_STORAGE_CONNECTION_STRING;
+const AZURE_CONN = process.env.AZURE_CONN;
 const CONTAINER = process.env.BLOB_CONTAINER || "ctfdata";
 const USERS_BLOB = "users.json";
 const JWT_SECRET = process.env.JWT_SECRET;
 
 async function getContainerClient() {
-  if (!AZURE_CONN) throw new Error("Missing AZURE_STORAGE_CONNECTION_STRING");
+  if (!AZURE_CONN) throw new Error("Missing AZURE_CONN");
   const blobServiceClient = BlobServiceClient.fromConnectionString(AZURE_CONN);
   const containerClient = blobServiceClient.getContainerClient(CONTAINER);
   const exists = await containerClient.exists();
