@@ -1,34 +1,16 @@
-// ===== Configuration =====
-const API_BASE_URL = 'https://kickoffapi-b9gabefrbsc5bre5.italynorth-01.azurewebsites.net/api';
 let jwtToken = null;
 
-// ===== Utility Functions =====
+// Use dedicated Function App URL
+const API_BASE_URL = 'https://kickoffapi-b9gabefrbsc5bre5.italynorth-01.azurewebsites.net/api';
+
+// Security: HTML escaping to prevent XSS
 function escapeHTML(str) {
-  if (!str) return '';
-  return str.replace(/[&<>'"]/g, c => ({
-    '&': '&amp;',
-    '<': '&lt;',
-    '>': '&gt;',
-    '"': '&quot;',
-    "'": '&#39;'
-  }[c]));
+  const div = document.createElement('div');
+  div.textContent = str;
+  return div.innerHTML;
 }
 
-function showMessage(elementId, text, type) {
-  const element = document.getElementById(elementId);
-  if (!element) return;
-  
-  element.textContent = text;
-  element.className = `message ${type}`;
-  element.style.display = 'block';
-  
-  // Auto-hide after 5 seconds
-  setTimeout(() => {
-    element.style.display = 'none';
-  }, 5000);
-}
-
-// ===== Session Management =====
+// Session management functions
 function saveSession(token) {
   sessionStorage.setItem('jwtToken', token);
   jwtToken = token;
@@ -46,73 +28,157 @@ function loadSession() {
 function clearSession() {
   sessionStorage.removeItem('jwtToken');
   jwtToken = null;
-}
-
-function checkAuth() {
-  const hasToken = loadSession();
-  const currentPage = window.location.pathname.split('/').pop() || 'index.html';
-  
-  // If on a protected page without token, redirect to login
-  if (!hasToken && currentPage !== 'index.html' && currentPage !== '') {
-    window.location.href = 'index.html';
-    return false;
-  }
-  
-  // If on landing page with token, redirect to dashboard
-  if (hasToken && (currentPage === 'index.html' || currentPage === '')) {
-    // Only redirect if we're on the actual landing view
-    const landingView = document.getElementById('landingView');
-    if (landingView && landingView.style.display !== 'none') {
-      window.location.href = 'dashboard.html';
-      return false;
-    }
-  }
-  
-  return hasToken;
-}
-
-// ===== Navigation Functions =====
-function setupNavigation() {
-  const isAuthenticated = loadSession();
-  const nav = document.getElementById('mainNav');
-  
-  if (nav) {
-    nav.style.display = isAuthenticated ? 'block' : 'none';
-  }
-  
-  // Setup mobile menu toggle
-  const navToggle = document.getElementById('navToggle');
-  const navLinks = document.getElementById('navLinks');
-  
-  if (navToggle && navLinks) {
-    navToggle.addEventListener('click', () => {
-      navLinks.classList.toggle('active');
-    });
-    
-    // Close menu when clicking outside
-    document.addEventListener('click', (e) => {
-      if (!e.target.closest('.nav-container')) {
-        navLinks.classList.remove('active');
-      }
-    });
-  }
-  
-  // Setup logout buttons
-  const logoutBtns = document.querySelectorAll('#logoutBtn, #navLogout');
-  logoutBtns.forEach(btn => {
-    if (btn) {
-      btn.addEventListener('click', logout);
-    }
-  });
-}
-
-function logout() {
-  clearSession();
   window.location.href = 'index.html';
 }
 
-// ===== API Functions =====
-async function register(username, password) {
+// Input validation
+function validateUsername(username) {
+  if (!username || username.length < 3 || username.length > 20) {
+    return 'Username must be between 3 and 20 characters';
+  }
+  if (!/^[a-zA-Z0-9_-]+$/.test(username)) {
+    return 'Username can only contain letters, numbers, hyphens, and underscores';
+  }
+  return null;
+}
+
+function validatePassword(password) {
+  if (!password || password.length < 6) {
+    return 'Password must be at least 6 characters';
+  }
+  return null;
+}
+
+function validateFlag(flag) {
+  if (!flag) {
+    return 'Flag cannot be empty';
+  }
+  if (!/^FLAG\{.+\}$/.test(flag)) {
+    return 'Flag must be in format: FLAG{text_here}';
+  }
+  return null;
+}
+
+// Message display
+function showMessage(elementId, message, type) {
+  const messageDiv = document.getElementById(elementId);
+  if (!messageDiv) return;
+  
+  messageDiv.textContent = message;
+  messageDiv.className = `message ${type}`;
+  messageDiv.style.display = 'block';
+  
+  // Auto-hide after 5 seconds
+  setTimeout(() => {
+    messageDiv.style.display = 'none';
+  }, 5000);
+}
+
+// Check if user is logged in (for protected pages)
+function checkAuth() {
+  const currentPage = window.location.pathname.split('/').pop();
+  const publicPages = ['index.html', 'login.html', ''];
+  
+  if (!publicPages.includes(currentPage)) {
+    if (!loadSession()) {
+      window.location.href = 'index.html';
+    }
+  }
+}
+
+// Initialize on page load
+document.addEventListener('DOMContentLoaded', () => {
+  checkAuth();
+  
+  // Toggle between login and register forms (index.html)
+  const showLoginBtn = document.getElementById('showLogin');
+  const showRegisterBtn = document.getElementById('showRegister');
+  const registerCard = document.getElementById('registerCard');
+  const loginCard = document.getElementById('loginCard');
+  
+  if (showLoginBtn) {
+    showLoginBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      registerCard.style.display = 'none';
+      loginCard.style.display = 'block';
+    });
+  }
+  
+  if (showRegisterBtn) {
+    showRegisterBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      loginCard.style.display = 'none';
+      registerCard.style.display = 'block';
+    });
+  }
+  
+  // Register form
+  const registerForm = document.getElementById('registerForm');
+  if (registerForm) {
+    registerForm.addEventListener('submit', handleRegister);
+  }
+  
+  // Login form
+  const loginForm = document.getElementById('loginForm');
+  if (loginForm) {
+    loginForm.addEventListener('submit', handleLogin);
+  }
+  
+  // Flag submission form
+  const flagForm = document.getElementById('flagForm');
+  if (flagForm) {
+    flagForm.addEventListener('submit', handleFlagSubmit);
+  }
+  
+  // Logout buttons
+  const logoutButtons = document.querySelectorAll('#navLogout, #logoutBtn');
+  logoutButtons.forEach(btn => {
+    if (btn) {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        clearSession();
+      });
+    }
+  });
+  
+  // Refresh scoreboard button
+  const refreshBtn = document.getElementById('refreshBtn');
+  if (refreshBtn) {
+    refreshBtn.addEventListener('click', loadScoreboard);
+  }
+  
+  // Load scoreboard if on dashboard
+  if (document.getElementById('scoreboardTable')) {
+    loadScoreboard();
+    loadUserStats();
+  }
+  
+  // Console flag for Events page
+  if (window.location.pathname.includes('events.html')) {
+    console.log('%cFLAG{console_log_detective}', 'color: #3285F5; font-size: 20px; font-weight: bold;');
+  }
+});
+
+// Register handler
+async function handleRegister(e) {
+  e.preventDefault();
+  
+  const username = document.getElementById('registerUsername').value.trim();
+  const password = document.getElementById('registerPassword').value.trim();
+  
+  // Validate inputs
+  const usernameError = validateUsername(username);
+  if (usernameError) {
+    showMessage('message', usernameError, 'error');
+    return;
+  }
+  
+  const passwordError = validatePassword(password);
+  if (passwordError) {
+    showMessage('message', passwordError, 'error');
+    return;
+  }
+  
   try {
     const res = await fetch(`${API_BASE_URL}/register`, {
       method: 'POST',
@@ -120,20 +186,43 @@ async function register(username, password) {
       body: JSON.stringify({ username, password })
     });
     
-    const text = await res.text();
-    
     if (res.ok) {
-      return { success: true, message: 'Registration successful! You can now log in.' };
+      showMessage('message', 'Registration successful! You can now log in.', 'success');
+      // Auto-switch to login form
+      setTimeout(() => {
+        document.getElementById('registerCard').style.display = 'none';
+        document.getElementById('loginCard').style.display = 'block';
+      }, 1500);
     } else {
-      return { success: false, message: `Registration failed: ${text || 'Unknown error'}` };
+      const text = await res.text();
+      showMessage('message', `Registration failed: ${text}`, 'error');
     }
   } catch (err) {
     console.error('Registration error:', err);
-    return { success: false, message: `Error: ${err.message}` };
+    showMessage('message', 'Network error. Please try again.', 'error');
   }
 }
 
-async function login(username, password) {
+// Login handler
+async function handleLogin(e) {
+  e.preventDefault();
+  
+  const username = document.getElementById('loginUsername').value.trim();
+  const password = document.getElementById('loginPassword').value.trim();
+  
+  // Validate inputs
+  const usernameError = validateUsername(username);
+  if (usernameError) {
+    showMessage('message', usernameError, 'error');
+    return;
+  }
+  
+  const passwordError = validatePassword(password);
+  if (passwordError) {
+    showMessage('message', passwordError, 'error');
+    return;
+  }
+  
   try {
     const res = await fetch(`${API_BASE_URL}/login`, {
       method: 'POST',
@@ -144,56 +233,28 @@ async function login(username, password) {
     if (res.ok) {
       const data = await res.json();
       saveSession(data.token);
-      return { success: true, token: data.token };
+      window.location.href = 'dashboard.html';
     } else {
       const text = await res.text();
-      return { success: false, message: `Login failed: ${text || 'Invalid credentials'}` };
+      showMessage('message', `Login failed: ${text}`, 'error');
     }
   } catch (err) {
     console.error('Login error:', err);
-    return { success: false, message: `Error: ${err.message}` };
+    showMessage('message', 'Network error. Please try again.', 'error');
   }
 }
 
-async function loadScoreboard() {
-  const tbody = document.querySelector('#scoreboardTable tbody');
-  if (!tbody) return;
+// Flag submission handler
+async function handleFlagSubmit(e) {
+  e.preventDefault();
   
-  try {
-    const res = await fetch(`${API_BASE_URL}/scoreboard`);
-    
-    if (res.ok) {
-      const data = await res.json();
-      tbody.innerHTML = '';
-      
-      const scoreboardData = Array.isArray(data) ? data : (data.scoreboard || []);
-      
-      if (scoreboardData.length === 0) {
-        tbody.innerHTML = '<tr><td colspan="3" class="loading-cell">No players yet. Be the first!</td></tr>';
-        return;
-      }
-      
-      scoreboardData.forEach((row, i) => {
-        const tr = document.createElement('tr');
-        tr.innerHTML = `
-          <td>${i + 1}</td>
-          <td>${escapeHTML(row.username)}</td>
-          <td>${escapeHTML(String(row.score || 0))}</td>
-        `;
-        tbody.appendChild(tr);
-      });
-    } else {
-      tbody.innerHTML = '<tr><td colspan="3" class="loading-cell">Failed to load scoreboard</td></tr>';
-    }
-  } catch (err) {
-    console.error('Scoreboard error:', err);
-    tbody.innerHTML = '<tr><td colspan="3" class="loading-cell">Error loading scoreboard</td></tr>';
-  }
-}
-
-async function submitFlag(flag) {
-  if (!jwtToken) {
-    return { success: false, message: 'Not authenticated. Please log in.' };
+  const flag = document.getElementById('flagInput').value.trim();
+  
+  // Validate flag format
+  const flagError = validateFlag(flag);
+  if (flagError) {
+    showMessage('scoreboardMessage', flagError, 'error');
+    return;
   }
   
   try {
@@ -206,233 +267,124 @@ async function submitFlag(flag) {
       body: JSON.stringify({ flag })
     });
     
-    const text = await res.text();
-    
     if (res.ok) {
-      try {
-        const data = JSON.parse(text);
-        return { 
-          success: true, 
-          message: `ðŸŽ‰ Correct! You earned ${data.points} points! Total: ${data.newScore}` 
-        };
-      } catch {
-        return { success: true, message: 'ðŸŽ‰ Flag accepted!' };
-      }
+      const data = await res.json();
+      showMessage('scoreboardMessage', 
+        `Flag accepted! +${data.points} points. New score: ${data.newScore}`, 
+        'success');
+      document.getElementById('flagInput').value = '';
+      loadScoreboard();
+      loadUserStats();
     } else {
-      let errorMessage = 'Invalid flag';
-      if (text.includes('already_claimed')) {
-        errorMessage = 'âš ï¸ You already submitted this flag!';
-      } else if (text.includes('invalid_flag')) {
-        errorMessage = 'âŒ Invalid flag. Keep searching!';
-      } else if (text.includes('invalid_token')) {
-        errorMessage = 'ðŸ”’ Session expired. Please log in again.';
-        setTimeout(() => logout(), 2000);
-      }
-      return { success: false, message: errorMessage };
+      const text = await res.text();
+      showMessage('scoreboardMessage', `Flag submission failed: ${text}`, 'error');
     }
   } catch (err) {
-    console.error('Submit flag error:', err);
-    return { success: false, message: `Error: ${err.message}` };
+    console.error('Flag submission error:', err);
+    showMessage('scoreboardMessage', 'Network error. Please try again.', 'error');
   }
 }
 
-// ===== Page-Specific Initialization =====
-
-// Landing Page (index.html)
-function initLandingPage() {
-  const registerForm = document.getElementById('registerForm');
-  const loginForm = document.getElementById('loginForm');
-  const registerCard = document.getElementById('registerCard');
-  const loginCard = document.getElementById('loginCard');
-  const showLoginLink = document.getElementById('showLogin');
-  const showRegisterLink = document.getElementById('showRegister');
-  
-  // Check if user is already logged in
-  if (loadSession()) {
-    window.location.href = 'dashboard.html';
-    return;
-  }
-  
-  // Toggle between register and login forms
-  if (showLoginLink) {
-    showLoginLink.addEventListener('click', (e) => {
-      e.preventDefault();
-      registerCard.style.display = 'none';
-      loginCard.style.display = 'block';
-    });
-  }
-  
-  if (showRegisterLink) {
-    showRegisterLink.addEventListener('click', (e) => {
-      e.preventDefault();
-      loginCard.style.display = 'none';
-      registerCard.style.display = 'block';
-    });
-  }
-  
-  // Register form handler
-  if (registerForm) {
-    registerForm.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const username = document.getElementById('registerUsername').value.trim();
-      const password = document.getElementById('registerPassword').value.trim();
+// Load scoreboard
+async function loadScoreboard() {
+  try {
+    const res = await fetch(`${API_BASE_URL}/scoreboard`);
+    
+    if (res.ok) {
+      const data = await res.json();
+      const tbody = document.querySelector('#scoreboardTable tbody');
       
-      if (!username || !password) {
-        showMessage('message', 'Please enter both username and password', 'error');
+      if (!tbody) return;
+      
+      tbody.innerHTML = '';
+      
+      const scoreboardData = Array.isArray(data) ? data : (data.scoreboard || []);
+      
+      if (scoreboardData.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="3" style="text-align:center;padding:2rem;color:rgba(255,255,255,0.5);">No players yet. Be the first!</td></tr>';
         return;
       }
       
-      const result = await register(username, password);
-      showMessage('message', result.message, result.success ? 'success' : 'error');
-      
-      if (result.success) {
-        registerForm.reset();
-        // Switch to login form
-        setTimeout(() => {
-          registerCard.style.display = 'none';
-          loginCard.style.display = 'block';
-        }, 1500);
-      }
-    });
-  }
-  
-  // Login form handler
-  if (loginForm) {
-    loginForm.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const username = document.getElementById('loginUsername').value.trim();
-      const password = document.getElementById('loginPassword').value.trim();
-      
-      if (!username || !password) {
-        showMessage('message', 'Please enter both username and password', 'error');
-        return;
-      }
-      
-      const result = await login(username, password);
-      
-      if (result.success) {
-        showMessage('message', 'Login successful! Redirecting...', 'success');
-        setTimeout(() => {
-          window.location.href = 'dashboard.html';
-        }, 1000);
-      } else {
-        showMessage('message', result.message, 'error');
-      }
-    });
+      scoreboardData.forEach((row, i) => {
+        const tr = document.createElement('tr');
+        const rank = i + 1;
+        
+        // Add medal emoji for top 3
+        let rankDisplay = rank;
+        if (rank === 1) rankDisplay = '🥇 1';
+        else if (rank === 2) rankDisplay = '🥈 2';
+        else if (rank === 3) rankDisplay = '🥉 3';
+        
+        tr.innerHTML = `
+          <td>${rankDisplay}</td>
+          <td>${escapeHTML(row.username)}</td>
+          <td><strong>${escapeHTML(String(row.score))}</strong></td>
+        `;
+        
+        // Highlight current user
+        if (jwtToken) {
+          try {
+            const payload = JSON.parse(atob(jwtToken.split('.')[1]));
+            if (payload.username === row.username) {
+              tr.style.background = 'rgba(50, 133, 245, 0.1)';
+              tr.style.borderLeft = '3px solid var(--color-google-blue)';
+            }
+          } catch (e) {}
+        }
+        
+        tbody.appendChild(tr);
+      });
+    } else {
+      showMessage('scoreboardMessage', 'Failed to load scoreboard.', 'error');
+    }
+  } catch (err) {
+    console.error('Scoreboard error:', err);
+    showMessage('scoreboardMessage', 'Network error loading scoreboard.', 'error');
   }
 }
 
-// Dashboard Page
-function initDashboardPage() {
-  if (!checkAuth()) return;
+// Load user stats for dashboard
+async function loadUserStats() {
+  if (!jwtToken) return;
   
-  // Load scoreboard on page load
-  loadScoreboard();
-  
-  // Auto-refresh scoreboard every 30 seconds
-  setInterval(loadScoreboard, 30000);
-  
-  // Refresh button
-  const refreshBtn = document.getElementById('refreshBtn');
-  if (refreshBtn) {
-    refreshBtn.addEventListener('click', () => {
-      refreshBtn.style.animation = 'none';
-      setTimeout(() => {
-        refreshBtn.style.animation = '';
-      }, 10);
-      loadScoreboard();
-    });
-  }
-  
-  // Flag submission form
-  const flagForm = document.getElementById('flagForm');
-  if (flagForm) {
-    flagForm.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const flagInput = document.getElementById('flagInput');
-      const flag = flagInput.value.trim();
+  try {
+    // Get current user's username from JWT
+    const payload = JSON.parse(atob(jwtToken.split('.')[1]));
+    const username = payload.username;
+    
+    // Fetch scoreboard to get user stats
+    const res = await fetch(`${API_BASE_URL}/scoreboard`);
+    if (res.ok) {
+      const data = await res.json();
+      const scoreboardData = Array.isArray(data) ? data : (data.scoreboard || []);
       
-      if (!flag) {
-        showMessage('scoreboardMessage', 'Please enter a flag', 'error');
-        return;
+      const userIndex = scoreboardData.findIndex(u => u.username === username);
+      
+      if (userIndex !== -1) {
+        const user = scoreboardData[userIndex];
+        
+        // Update stat cards
+        const totalPointsEl = document.getElementById('totalPoints');
+        const flagsFoundEl = document.getElementById('flagsFound');
+        const globalRankEl = document.getElementById('globalRank');
+        
+        if (totalPointsEl) totalPointsEl.textContent = user.score || 0;
+        if (flagsFoundEl) {
+          // Calculate flags found (50pts + 100pts*2 + 150pts*2 = 650 total)
+          const score = user.score || 0;
+          let flagsFound = 0;
+          if (score >= 50) flagsFound++;
+          if (score >= 150) flagsFound++;
+          if (score >= 250) flagsFound++;
+          if (score >= 400) flagsFound++;
+          if (score >= 550) flagsFound++;
+          if (score >= 650) flagsFound = 6;
+          flagsFoundEl.textContent = flagsFound;
+        }
+        if (globalRankEl) globalRankEl.textContent = `#${userIndex + 1}`;
       }
-      
-      if (!flag.startsWith('FLAG{') || !flag.endsWith('}')) {
-        showMessage('scoreboardMessage', 'Flag must be in format: FLAG{...}', 'error');
-        return;
-      }
-      
-      const result = await submitFlag(flag);
-      showMessage('scoreboardMessage', result.message, result.success ? 'success' : 'error');
-      
-      if (result.success) {
-        flagInput.value = '';
-        // Refresh scoreboard after successful submission
-        setTimeout(loadScoreboard, 1000);
-      }
-    });
-  }
-  
-  // Display welcome message with username (if available)
-  const welcomeMessage = document.getElementById('welcomeMessage');
-  if (welcomeMessage) {
-    // You could decode the JWT to get username, but for simplicity:
-    welcomeMessage.textContent = 'Welcome back, hacker! ðŸš€';
+    }
+  } catch (err) {
+    console.error('Stats error:', err);
   }
 }
-
-// About/Events Pages
-function initStaticPage() {
-  if (!checkAuth()) return;
-  // No special initialization needed for static pages
-}
-
-// ===== Main Initialization =====
-document.addEventListener('DOMContentLoaded', () => {
-  // Setup navigation for all pages
-  setupNavigation();
-  
-  // Determine current page and initialize accordingly
-  const currentPage = window.location.pathname.split('/').pop() || 'index.html';
-  
-  switch (currentPage) {
-    case 'index.html':
-    case '':
-      initLandingPage();
-      break;
-    case 'dashboard.html':
-      initDashboardPage();
-      break;
-    case 'about.html':
-    case 'events.html':
-      initStaticPage();
-      break;
-    default:
-      // Unknown page, setup basic auth check
-      checkAuth();
-  }
-  
-  // Add smooth scrolling to all anchor links
-  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-      e.preventDefault();
-      const target = document.querySelector(this.getAttribute('href'));
-      if (target) {
-        target.scrollIntoView({
-          behavior: 'smooth',
-          block: 'start'
-        });
-      }
-    });
-  });
-});
-
-// ===== Error Handling =====
-window.addEventListener('unhandledrejection', (event) => {
-  console.error('Unhandled promise rejection:', event.reason);
-});
-
-// ===== Console Easter Egg =====
-console.log('%cðŸ” Welcome, CTF Hunter! ðŸ”', 'color: #3285F5; font-size: 24px; font-weight: bold;');
-console.log('%cLooks like you know your way around developer tools!', 'color: #57CAFF; font-size: 14px;');
-console.log('%cKeep exploring... there are more flags hidden around here! ðŸš©', 'color: #F9AB00; font-size: 14px;');

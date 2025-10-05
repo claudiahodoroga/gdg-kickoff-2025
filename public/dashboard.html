@@ -1,111 +1,129 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Dashboard - GDG CTF 2025</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
+
+  <!-- Fonts & Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet"/>
+
+  <!-- Shared theme -->
+  <link rel="stylesheet" href="css/shared.css"/>
+  <link rel="stylesheet" href="css/new-dashboard.css"/>
 </head>
 <body>
-  <!-- Navigation -->
-  <nav id="mainNav">
+  <!-- Top App Bar -->
+  <nav id="mainNav" class="glass-effect" style="position:sticky;top:0;z-index:var(--z-index-header);backdrop-filter:saturate(1.2) blur(10px);">
     <div class="nav-container">
-      <div class="nav-logo">
-        <span class="logo-text">GDG <span class="logo-highlight">CTF</span></span>
-      </div>
-      <button class="nav-toggle" id="navToggle">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
-      <ul class="nav-links" id="navLinks">
+      <div class="nav-logo">GDG <span class="text-gradient">CTF</span></div>
+      <ul class="nav-links">
         <li><a href="dashboard.html" class="active">Dashboard</a></li>
         <li><a href="about.html">About GDG</a></li>
         <li><a href="events.html">Events</a></li>
-        <li><button id="navLogout" class="btn-logout">Logout</button></li>
+        <li><button id="navLogout" class="button button-secondary" style="height:40px;padding:8px 14px;">Logout</button></li>
       </ul>
     </div>
   </nav>
 
-  <!-- Main Content -->
-  <main class="main-content">
-    <div class="content-container">
-      <!-- Welcome Header -->
-      <section class="dashboard-header">
-        <h1 class="page-title">Dashboard</h1>
-        <p class="page-subtitle" id="welcomeMessage">Welcome back, hacker! 🚀</p>
+  <main class="mdc-top-app-bar--fixed-adjust">
+    <div class="dashboard-container">
+      <!-- Stats -->
+      <section class="stats-grid">
+        <article class="stat-card card">
+          <div class="stat-icon blue"><i class="material-icons-round">military_tech</i></div>
+          <div class="stat-content">
+            <div class="stat-value" id="totalPoints">0</div>
+            <div class="stat-label">Total Points</div>
+          </div>
+        </article>
+
+        <article class="stat-card card">
+          <div class="stat-icon green"><i class="material-icons-round">flag</i></div>
+          <div class="stat-content">
+            <div class="stat-value" id="flagsFound">0</div>
+            <div class="stat-label">Flags Found</div>
+          </div>
+        </article>
+
+        <article class="stat-card card">
+          <div class="stat-icon yellow"><i class="material-icons-round">leaderboard</i></div>
+          <div class="stat-content">
+            <div class="stat-value" id="globalRank">--</div>
+            <div class="stat-label">Global Rank</div>
+          </div>
+        </article>
       </section>
 
       <!-- Flag Submission -->
-      <section class="submission-section">
-        <div class="submission-card">
-          <h2 class="card-title">Submit Flag</h2>
-          <p class="card-description">Found a flag? Submit it here to earn points!</p>
-          <form id="flagForm" class="flag-form">
-            <div class="flag-input-group">
-              <input 
-                type="text" 
-                id="flagInput" 
-                placeholder="FLAG{enter_your_flag_here}" 
-                required
-                pattern="FLAG\{.*\}"
-              >
-              <button type="submit" class="btn-submit">Submit</button>
-            </div>
-            <small class="input-hint">Format: FLAG{text_here}</small>
-          </form>
-          <div id="scoreboardMessage" class="message"></div>
+      <section class="flag-section card">
+        <h2 class="section-title">Submit Flag</h2>
+        <p class="section-subtitle">Found a flag? Submit it here to earn points!</p>
+
+        <form id="flagForm" class="flag-form" novalidate>
+          <div class="flag-input-group">
+            <i class="material-icons-round flag-input-icon">flag</i>
+            <input
+              type="text"
+              id="flagInput"
+              class="input-field flag-input"
+              placeholder="FLAG{enter_your_flag_here}"
+              required
+              pattern="FLAG\{.*\}"
+            />
+          </div>
+          <button type="submit" class="button button-primary">
+            <i class="material-icons-round">send</i> Submit Flag
+          </button>
+          <p class="hint">Format: <code>FLAG{text_here}</code></p>
+        </form>
+
+        <div id="scoreboardMessage" class="message" role="alert" style="display:none;"></div>
+      </section>
+
+      <!-- Leaderboard -->
+      <section class="leaderboard-section card">
+        <div class="leaderboard-header">
+          <h2 class="leaderboard-title"><i class="material-icons-round">emoji_events</i> Leaderboard</h2>
+          <button id="refreshBtn" class="button button-secondary" title="Refresh">
+            <i class="material-icons-round">refresh</i>
+          </button>
+        </div>
+
+        <div class="table-container">
+          <table class="leaderboard-table" id="scoreboardTable" aria-live="polite">
+            <thead>
+              <tr>
+                <th>Rank</th>
+                <th>Player</th>
+                <th>Score</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td colspan="3" style="text-align:center;padding:2rem;color:rgba(255,255,255,0.5);">
+                  Loading scoreboard...
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </section>
 
-      <!-- Scoreboard -->
-      <section class="scoreboard-section">
-        <div class="scoreboard-card">
-          <div class="card-header">
-            <h2 class="card-title">Leaderboard</h2>
-            <button id="refreshBtn" class="btn-refresh" title="Refresh scoreboard">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <polyline points="23 4 23 10 17 10"></polyline>
-                <polyline points="1 20 1 14 7 14"></polyline>
-                <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path>
-              </svg>
-            </button>
-          </div>
-          <div class="table-container">
-            <table id="scoreboardTable">
-              <thead>
-                <tr>
-                  <th>Rank</th>
-                  <th>Player</th>
-                  <th>Score</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td colspan="3" class="loading-cell">Loading scoreboard...</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </section>
-
-      <!-- Tips Section -->
-      <section class="tips-section">
-        <div class="tips-card">
-          <h3 class="card-title">Hunting Tips</h3>
-          <ul class="tips-list">
-            <li><strong>Inspect Elements:</strong> Right-click and use "Inspect" to view HTML</li>
-            <li><strong>View Source:</strong> Press Ctrl+U (Cmd+Option+U on Mac) to see raw HTML</li>
-            <li><strong>Console:</strong> Press F12 and check the Console tab for hidden messages</li>
-            <li><strong>Network Tab:</strong> Monitor API requests and responses</li>
-            <li><strong>Images:</strong> Check image alt text and metadata</li>
-            <li><strong>CSS:</strong> Inspect styles for hidden elements</li>
-          </ul>
-        </div>
+      <!-- CTF Tips -->
+      <section class="tips-section card">
+        <h3 class="section-title"><i class="material-icons-round">lightbulb</i> CTF Tips</h3>
+        <ul class="tips-list">
+          <li>🔍 Use browser Developer Tools (F12) to inspect elements</li>
+          <li>📄 Check page source (Ctrl+U) for hidden comments</li>
+          <li>🎨 Inspect CSS and HTML attributes carefully</li>
+          <li>💬 Keep an eye on the browser console</li>
+          <li>🌐 Check the Network tab for API calls</li>
+          <li>🧩 Explore all pages thoroughly</li>
+        </ul>
       </section>
     </div>
   </main>
@@ -116,11 +134,5 @@
   </footer>
 
   <script src="app.js"></script>
-  <script>
-    // Console flag for beginners
-    console.log('%c🚩 FLAG FOUND! 🚩', 'color: #3285F5; font-size: 20px; font-weight: bold;');
-    console.log('%cCongratulations! You checked the console!', 'color: #57CAFF; font-size: 14px;');
-    console.log('%cHere is your flag: FLAG{console_log_detective}', 'color: #F9AB00; font-size: 16px; font-weight: bold;');
-  </script>
 </body>
 </html>

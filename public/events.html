@@ -6,38 +6,33 @@
   <title>Events - GDG CTF 2025</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+  <link rel="stylesheet" href="css/shared.css">
+  <link rel="stylesheet" href="css/events.css">
 </head>
 <body>
   <!-- Navigation -->
-  <nav id="mainNav">
+  <nav id="mainNav" class="glass-effect" style="position:sticky;top:0;z-index:var(--z-index-header);backdrop-filter:saturate(1.2) blur(10px);">
     <div class="nav-container">
-      <div class="nav-logo">
-        <span class="logo-text">GDG <span class="logo-highlight">CTF</span></span>
-      </div>
-      <button class="nav-toggle" id="navToggle">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
-      <ul class="nav-links" id="navLinks">
+      <div class="nav-logo">GDG <span class="text-gradient">CTF</span></div>
+      <ul class="nav-links">
         <li><a href="dashboard.html">Dashboard</a></li>
         <li><a href="about.html">About GDG</a></li>
         <li><a href="events.html" class="active">Events</a></li>
-        <li><button id="navLogout" class="btn-logout">Logout</button></li>
+        <li><button id="navLogout" class="button button-secondary" style="height:40px;padding:8px 14px;">Logout</button></li>
       </ul>
     </div>
   </nav>
 
   <!-- Main Content -->
   <main class="main-content">
-    <div class="content-container">
+    <div class="dashboard-container">
       <!-- Hero Section -->
       <section class="events-hero">
-        <h1 class="page-title">Upcoming Events</h1>
+        <h1 class="page-title">Upcoming <span class="text-gradient">Events</span></h1>
         <p class="page-subtitle">
-          Join us for exciting workshops, talks, and networking opportunities
+          Join us for exciting workshops, talks, and networking opportunities in the world of technology
         </p>
       </section>
 
@@ -58,10 +53,19 @@
                 Perfect for beginners looking to understand cloud architecture.
               </p>
               <div class="event-meta">
-                <span class="event-time">⏰ 6:00 PM - 8:00 PM</span>
-                <span class="event-location">📍 Tech Hub Room 201</span>
+                <span class="event-time">
+                  <i class="material-icons-round">schedule</i>
+                  6:00 PM - 8:00 PM
+                </span>
+                <span class="event-location">
+                  <i class="material-icons-round">location_on</i>
+                  Tech Hub Room 201
+                </span>
               </div>
-              <button class="btn-event">Register Now</button>
+              <button class="btn-event">
+                <i class="material-icons-round">how_to_reg</i>
+                Register Now
+              </button>
             </div>
           </div>
 
@@ -78,8 +82,14 @@
                 Hands-on session with live coding and Q&A.
               </p>
               <div class="event-meta">
-                <span class="event-time">⏰ 2:00 PM - 5:00 PM</span>
-                <span class="event-location">📍 Computer Lab B</span>
+                <span class="event-time">
+                  <i class="material-icons-round">schedule</i>
+                  2:00 PM - 5:00 PM
+                </span>
+                <span class="event-location">
+                  <i class="material-icons-round">location_on</i>
+                  Computer Lab B
+                </span>
               </div>
               <button class="btn-event">Register Now</button>
             </div>
@@ -98,8 +108,14 @@
                 Learn how to build and train your first ML model.
               </p>
               <div class="event-meta">
-                <span class="event-time">⏰ 4:00 PM - 6:00 PM</span>
-                <span class="event-location">📍 Online via Meet</span>
+                <span class="event-time">
+                  <i class="material-icons-round">schedule</i>
+                  4:00 PM - 6:00 PM
+                </span>
+                <span class="event-location">
+                  <i class="material-icons-round">videocam</i>
+                  Online via Meet
+                </span>
               </div>
               <button class="btn-event">Register Now</button>
             </div>
@@ -118,8 +134,14 @@
                 Build and deploy a real-world web application.
               </p>
               <div class="event-meta">
-                <span class="event-time">⏰ 10:00 AM - 4:00 PM</span>
-                <span class="event-location">📍 Innovation Center</span>
+                <span class="event-time">
+                  <i class="material-icons-round">schedule</i>
+                  10:00 AM - 4:00 PM
+                </span>
+                <span class="event-location">
+                  <i class="material-icons-round">location_on</i>
+                  Innovation Center
+                </span>
               </div>
               <button class="btn-event">Register Now</button>
             </div>
@@ -138,8 +160,14 @@
                 Get insights on career paths, interview tips, and networking.
               </p>
               <div class="event-meta">
-                <span class="event-time">⏰ 7:00 PM - 9:00 PM</span>
-                <span class="event-location">📍 Auditorium Main Hall</span>
+                <span class="event-time">
+                  <i class="material-icons-round">schedule</i>
+                  7:00 PM - 9:00 PM
+                </span>
+                <span class="event-location">
+                  <i class="material-icons-round">location_on</i>
+                  Auditorium Main Hall
+                </span>
               </div>
               <button class="btn-event">Register Now</button>
             </div>
@@ -159,8 +187,14 @@
                 Form teams, code together, and win amazing prizes!
               </p>
               <div class="event-meta">
-                <span class="event-time">⏰ 9:00 AM (Sat) - 9:00 AM (Sun)</span>
-                <span class="event-location">📍 Student Center</span>
+                <span class="event-time">
+                  <i class="material-icons-round">schedule</i>
+                  9:00 AM (Sat) - 9:00 AM (Sun)
+                </span>
+                <span class="event-location">
+                  <i class="material-icons-round">location_on</i>
+                  Student Center
+                </span>
               </div>
               <button class="btn-event">Register Now</button>
             </div>
@@ -220,25 +254,6 @@
 
   <script src="app.js"></script>
   <script>
-    // Network flag - this endpoint doesn't exist but will be visible in Network tab
-    fetch('/api/secret-data')
-      .then(res => res.json())
-      .catch(err => {
-        // The flag is in the request attempt itself
-        console.log('Checking secret endpoint...');
-      });
-
-    // Add custom header with flag (visible in Network tab when any request is made)
-    document.addEventListener('DOMContentLoaded', () => {
-      const originalFetch = window.fetch;
-      window.fetch = function(...args) {
-        const [url, config = {}] = args;
-        config.headers = config.headers || {};
-        config.headers['X-Secret-Flag'] = 'FLAG{network_requests_reveal_secrets}';
-        return originalFetch(url, config);
-      };
-    });
-
     // Subscribe form handler
     document.getElementById('subscribeForm').addEventListener('submit', (e) => {
       e.preventDefault();
