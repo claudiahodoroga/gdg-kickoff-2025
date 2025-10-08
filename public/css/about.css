@@ -304,6 +304,16 @@
   padding: var(--spacing-xl);
 }
 
+/* Ajustes para eliminar el relleno superior extraño */
+.about-hero {
+  padding-top: var(--spacing-xl);
+}
+
+/* Ajustes para el contenido interno */
+.mission-section, .team-section, .values-grid {
+  padding: var(--spacing-xl);
+}
+
 /* Animations */
 @keyframes fadeIn {
   from {

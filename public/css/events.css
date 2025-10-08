@@ -118,6 +118,11 @@
   padding-top: calc(var(--spacing-xl) + 40px);
 }
 
+/* Ajustes para el espacio entre la fecha y el título */
+.event-content {
+  padding-top: var(--spacing-lg);
+}
+
 .event-title {
   font-size: 1.25rem;
   font-weight: 600;
@@ -395,4 +400,14 @@
   .cta-card {
     padding: var(--spacing-xl);
   }
+}
+
+/* Ajustes para eliminar el relleno superior extraño */
+.events-hero {
+  padding-top: var(--spacing-xl);
+}
+
+/* Ajustes para el relleno lateral en la sección de eventos destacados */
+.past-events-highlights {
+  padding: 0 var(--spacing-xl);
 }
