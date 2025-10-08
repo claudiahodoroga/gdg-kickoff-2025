@@ -262,6 +262,13 @@
   padding: var(--spacing-xxl) var(--spacing-xl);
 }
 
+/* Ajustes para centrar el contenido y limitar el ancho */
+.events-hero, .events-grid, .cta-section {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: var(--spacing-xl);
+}
+
 .cta-card {
   background: linear-gradient(135deg,
     rgba(50, 133, 245, 0.1) 0%,
