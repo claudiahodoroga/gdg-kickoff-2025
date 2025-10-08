@@ -122,83 +122,36 @@
           </div>
 
           <!-- Event Card 4 -->
-          <div class="event-card">
+          <div class="event-card" style="border: 2px solid var(--color-google-yellow);">
+            <div class="event-badge">After Hours 🎵</div>
             <div class="event-date">
-              <span class="date-day">05</span>
-              <span class="date-month">NOV</span>
+              <span class="date-day">🎉</span>
+              <span class="date-month">THU</span>
             </div>
             <div class="event-content">
-              <h3 class="event-title">Web Development Bootcamp</h3>
+              <h3 class="event-title">Post-DevFest Celebration</h3>
               <p class="event-description">
-                Master modern web development with HTML, CSS, JavaScript, and Firebase. 
-                Build and deploy a real-world web application.
+                After all the tech talks, where do Girona students celebrate? 
+                <strong>Hint:</strong> It's a Thursday tradition at the most popular student venue. 
+                The flag format is: FLAG{venue_day_type} (in Catalan, all lowercase, underscores).
               </p>
               <div class="event-meta">
                 <span class="event-time">
                   <i class="material-icons-round">schedule</i>
-                  10:00 AM - 4:00 PM
+                  Dijous universitari!
                 </span>
                 <span class="event-location">
-                  <i class="material-icons-round">location_on</i>
-                  Innovation Center
+                  <i class="material-icons-round">celebration</i>
+                  The legendary student spot
                 </span>
               </div>
-              <button class="btn-event">Register Now</button>
+              <button class="btn-event" onclick="alert('Think about where UdG students go on Thursday nights... 💃')">
+                Need a bigger hint?
+              </button>
             </div>
           </div>
+          <!-- FLAG{platea_dijous_universitari} -->
 
-          <!-- Event Card 5 -->
-          <div class="event-card">
-            <div class="event-date">
-              <span class="date-day">12</span>
-              <span class="date-month">NOV</span>
-            </div>
-            <div class="event-content">
-              <h3 class="event-title">Tech Career Panel</h3>
-              <p class="event-description">
-                Meet industry professionals from Google, Microsoft, and startups. 
-                Get insights on career paths, interview tips, and networking.
-              </p>
-              <div class="event-meta">
-                <span class="event-time">
-                  <i class="material-icons-round">schedule</i>
-                  7:00 PM - 9:00 PM
-                </span>
-                <span class="event-location">
-                  <i class="material-icons-round">location_on</i>
-                  Auditorium Main Hall
-                </span>
-              </div>
-              <button class="btn-event">Register Now</button>
-            </div>
-          </div>
-
-          <!-- Event Card 6 -->
-          <div class="event-card">
-            <div class="event-badge">Hackathon</div>
-            <div class="event-date">
-              <span class="date-day">19</span>
-              <span class="date-month">NOV</span>
-            </div>
-            <div class="event-content">
-              <h3 class="event-title">GDG Hackathon 2025</h3>
-              <p class="event-description">
-                24-hour hackathon to build innovative solutions for real-world problems. 
-                Form teams, code together, and win amazing prizes!
-              </p>
-              <div class="event-meta">
-                <span class="event-time">
-                  <i class="material-icons-round">schedule</i>
-                  9:00 AM (Sat) - 9:00 AM (Sun)
-                </span>
-                <span class="event-location">
-                  <i class="material-icons-round">location_on</i>
-                  Student Center
-                </span>
-              </div>
-              <button class="btn-event">Register Now</button>
-            </div>
-          </div>
         </div>
       </section>
 
@@ -252,14 +205,36 @@
     <p>&copy; 2025 Google Developer Groups. All rights reserved.</p>
   </footer>
 
-  <script src="app.js"></script>
-  <script>
-    // Subscribe form handler
-    document.getElementById('subscribeForm').addEventListener('submit', (e) => {
-      e.preventDefault();
-      alert('Thanks for subscribing! Check your email for confirmation.');
-      e.target.reset();
-    });
-  </script>
+<script src="app.js"></script>
+<script>
+// Console flag for Events page with Game of Thrones hint
+if (window.location.pathname.includes('events.html') || 
+    window.location.pathname.endsWith('events.html') || 
+    document.title.includes('Events')) {
+  
+  console.log('%c╔════════════════════════════════════════════╗', 'color: #F9AB00; font-weight: bold; font-size: 12px;');
+  console.log('%c║  🏰 GIRONA FILMING LOCATION TRIVIA 🏰     ║', 'color: #F9AB00; font-weight: bold; font-size: 12px;');
+  console.log('%c║                                            ║', 'color: #F9AB00; font-size: 12px;');
+  console.log('%c║  In 2016, Girona\'s medieval streets and   ║', 'color: #3285F5; font-size: 11px;');
+  console.log('%c║  cathedral became King\'s Landing and       ║', 'color: #3285F5; font-size: 11px;');
+  console.log('%c║  Braavos for Game of Thrones Season 6.    ║', 'color: #3285F5; font-size: 11px;');
+  console.log('%c║                                            ║', 'color: #F9AB00; font-size: 12px;');
+  console.log('%c║  🎬 Fun fact: The Sept stairs scene was   ║', 'color: #57CAFF; font-size: 11px;');
+  console.log('%c║  filmed at Girona Cathedral!               ║', 'color: #57CAFF; font-size: 11px;');
+  console.log('%c║                                            ║', 'color: #F9AB00; font-size: 12px;');
+  console.log('%c║  Hint: What famous GoT phrase + location? ║', 'color: #EA4335; font-size: 11px; font-style: italic;');
+  console.log('%c║  FLAG{winter_came_to_girona}              ║', 'color: #EA4335; font-weight: bold; font-size: 13px;');
+  console.log('%c╚════════════════════════════════════════════╝', 'color: #F9AB00; font-weight: bold; font-size: 12px;');
+  
+  console.log('%c\n🎯 CTF Tip: Explore the Network tab too!\n', 'color: #0F9D58; font-size: 12px; font-weight: bold;');
+}
+
+// Subscribe form handler
+document.getElementById('subscribeForm').addEventListener('submit', (e) => {
+  e.preventDefault();
+  alert('Thanks for subscribing! Check your email for confirmation.');
+  e.target.reset();
+});
+</script>
 </body>
 </html>

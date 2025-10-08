@@ -33,20 +33,87 @@ function clearSession() {
 
 // Input validation
 function validateUsername(username) {
+  const errors = [];
+  
   if (!username || username.length < 3 || username.length > 20) {
-    return 'Username must be between 3 and 20 characters';
+    errors.push('Username must be between 3 and 20 characters');
   }
+  
   if (!/^[a-zA-Z0-9_-]+$/.test(username)) {
-    return 'Username can only contain letters, numbers, hyphens, and underscores';
+    errors.push('Username can only contain letters, numbers, hyphens, and underscores');
   }
-  return null;
+  
+  // Silly rule: Username must contain at least one vowel
+  if (!/[aeiouAEIOU]/.test(username)) {
+    errors.push('Username must contain at least one vowel (a, e, i, o, u)');
+  }
+  
+  // Silly rule: Username cannot be all lowercase
+  if (username === username.toLowerCase() && username.length > 0) {
+    errors.push('Username must contain at least one uppercase letter');
+  }
+  
+  return errors.length > 0 ? errors.join(' ') : null;
 }
 
-function validatePassword(password) {
-  if (!password || password.length < 6) {
-    return 'Password must be at least 6 characters';
+function validatePassword(password, username) {
+  const errors = [];
+  
+  // Basic requirement
+  if (!password || password.length < 10) {
+    errors.push('🔒 Password must be at least 10 characters');
   }
-  return null;
+  
+  // Must have uppercase
+  if (!/[A-Z]/.test(password)) {
+    errors.push('🔤 Password must contain at least one uppercase letter');
+  }
+  
+  // Must have lowercase
+  if (!/[a-z]/.test(password)) {
+    errors.push('🔡 Password must contain at least one lowercase letter');
+  }
+  
+  // Must have number
+  if (!/[0-9]/.test(password)) {
+    errors.push('🔢 Password must contain at least one number');
+  }
+  
+  // Silly rule: Must contain a special character
+  if (!/[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(password)) {
+    errors.push('✨ Password must contain at least one special character (!@#$%^&*)');
+  }
+  
+  // Silly rule: Must contain a letter from the username
+  if (username && username.length > 0) {
+    const usernameChars = username.toLowerCase().split('');
+    const hasUsernameChar = usernameChars.some(char => password.toLowerCase().includes(char));
+    if (!hasUsernameChar) {
+      errors.push('👤 Password must contain at least one letter from your username');
+    }
+  }
+  
+  // Silly rule: The digits must sum to at least 20
+  const digits = password.match(/\d/g);
+  if (digits) {
+    const sum = digits.reduce((acc, d) => acc + parseInt(d), 0);
+    if (sum < 20) {
+      errors.push(`🧮 The digits in your password must sum to at least 20 (current: ${sum})`);
+    }
+  }
+  
+  // Silly rule: Cannot contain the word "password"
+  if (password.toLowerCase().includes('password')) {
+    errors.push('🚫 Password cannot contain the word "password"');
+  }
+  
+  // Silly rule: Must include the current month number
+  const currentMonth = new Date().getMonth() + 1; // October = 10
+  if (!password.includes(String(currentMonth))) {
+    errors.push(`📅 Password must include the current month number (${currentMonth})`);
+  }
+  
+  return errors.length > 0 ? errors : null;
 }
 
 function validateFlag(flag) {
@@ -64,14 +131,14 @@ function showMessage(elementId, message, type) {
   const messageDiv = document.getElementById(elementId);
   if (!messageDiv) return;
   
-  messageDiv.textContent = message;
+  messageDiv.innerHTML = message; // Use innerHTML to support HTML formatting
   messageDiv.className = `message ${type}`;
   messageDiv.style.display = 'block';
   
-  // Auto-hide after 5 seconds
+  // Auto-hide after 8 seconds (longer for password errors)
   setTimeout(() => {
     messageDiv.style.display = 'none';
-  }, 5000);
+  }, 8000);
 }
 
 // Check if user is logged in (for protected pages)
@@ -109,6 +176,26 @@ document.addEventListener('DOMContentLoaded', () => {
       e.preventDefault();
       loginCard.style.display = 'none';
       registerCard.style.display = 'block';
+    });
+  }
+  
+  // Real-time password validation feedback
+  const registerPassword = document.getElementById('registerPassword');
+  const registerUsername = document.getElementById('registerUsername');
+  if (registerPassword && registerUsername) {
+    registerPassword.addEventListener('input', () => {
+      const username = registerUsername.value.trim();
+      const password = registerPassword.value.trim();
+      const errors = validatePassword(password, username);
+      
+      const helpText = document.getElementById('passwordHelp');
+      if (helpText && errors) {
+        helpText.innerHTML = errors.map(err => `<div style="margin:4px 0;">${err}</div>`).join('');
+        helpText.style.color = 'rgba(234, 67, 53, 0.9)';
+      } else if (helpText) {
+        helpText.innerHTML = '✅ Password meets all requirements!';
+        helpText.style.color = 'rgba(15, 157, 88, 0.9)';
+      }
     });
   }
   
@@ -153,9 +240,22 @@ document.addEventListener('DOMContentLoaded', () => {
     loadUserStats();
   }
   
-  // Console flag for Events page
   if (window.location.pathname.includes('events.html')) {
     console.log('%cFLAG{console_log_detective}', 'color: #3285F5; font-size: 20px; font-weight: bold;');
+  }
+
+  if (window.location.pathname.includes('about.html')) {
+    const originalFetch = window.fetch;
+    window.fetch = function(...args) {
+      const [url, config = {}] = args;
+      config.headers = config.headers || {};
+      config.headers['X-Girona-History'] = 'Gustave Eiffel built Pont de les Peixateries Velles in 1877, before his famous tower!';
+      config.headers['X-Secret-Flag'] = 'FLAG{pont_de_ferro_1877}';
+      return originalFetch(url, config);
+    };
+    
+    // Trigger a fetch so they can see the headers
+    fetch(`${API_BASE_URL}/scoreboard`).catch(() => {});
   }
 });
 
@@ -166,16 +266,19 @@ async function handleRegister(e) {
   const username = document.getElementById('registerUsername').value.trim();
   const password = document.getElementById('registerPassword').value.trim();
   
-  // Validate inputs
+  // Validate username
   const usernameError = validateUsername(username);
   if (usernameError) {
     showMessage('message', usernameError, 'error');
     return;
   }
   
-  const passwordError = validatePassword(password);
-  if (passwordError) {
-    showMessage('message', passwordError, 'error');
+  // Validate password
+  const passwordErrors = validatePassword(password, username);
+  if (passwordErrors) {
+    const errorHTML = '<strong>Password requirements not met:</strong><br>' + 
+                      passwordErrors.map(err => `• ${err}`).join('<br>');
+    showMessage('message', errorHTML, 'error');
     return;
   }
   
@@ -187,7 +290,7 @@ async function handleRegister(e) {
     });
     
     if (res.ok) {
-      showMessage('message', 'Registration successful! You can now log in.', 'success');
+      showMessage('message', '🎉 Registration successful! You can now log in.', 'success');
       // Auto-switch to login form
       setTimeout(() => {
         document.getElementById('registerCard').style.display = 'none';
@@ -210,16 +313,9 @@ async function handleLogin(e) {
   const username = document.getElementById('loginUsername').value.trim();
   const password = document.getElementById('loginPassword').value.trim();
   
-  // Validate inputs
-  const usernameError = validateUsername(username);
-  if (usernameError) {
-    showMessage('message', usernameError, 'error');
-    return;
-  }
-  
-  const passwordError = validatePassword(password);
-  if (passwordError) {
-    showMessage('message', passwordError, 'error');
+  // Simple validation for login (no silly rules)
+  if (!username || !password) {
+    showMessage('message', 'Please enter both username and password', 'error');
     return;
   }
   
@@ -270,7 +366,7 @@ async function handleFlagSubmit(e) {
     if (res.ok) {
       const data = await res.json();
       showMessage('scoreboardMessage', 
-        `Flag accepted! +${data.points} points. New score: ${data.newScore}`, 
+        `🎯 Flag accepted! +${data.points} points. New score: ${data.newScore}`, 
         'success');
       document.getElementById('flagInput').value = '';
       loadScoreboard();
@@ -370,15 +466,15 @@ async function loadUserStats() {
         
         if (totalPointsEl) totalPointsEl.textContent = user.score || 0;
         if (flagsFoundEl) {
-          // Calculate flags found (50pts + 100pts*2 + 150pts*2 = 650 total)
+          // Calculate flags found (50pts + 50pts + 100pts*2 + 150pts*2 = 650 total)
           const score = user.score || 0;
           let flagsFound = 0;
           if (score >= 50) flagsFound++;
-          if (score >= 150) flagsFound++;
-          if (score >= 250) flagsFound++;
-          if (score >= 400) flagsFound++;
-          if (score >= 550) flagsFound++;
-          if (score >= 650) flagsFound = 6;
+          if (score >= 100) flagsFound++;
+          if (score >= 200) flagsFound++;
+          if (score >= 300) flagsFound++;
+          if (score >= 450) flagsFound++;
+          if (score >= 600) flagsFound = 6;
           flagsFoundEl.textContent = flagsFound;
         }
         if (globalRankEl) globalRankEl.textContent = `#${userIndex + 1}`;

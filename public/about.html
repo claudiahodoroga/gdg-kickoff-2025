@@ -105,11 +105,17 @@
           <div class="team-member">
             <div class="member-avatar">
               <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Crect fill='%233285F5' width='120' height='120'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-size='48' fill='white' font-family='Arial'%3EAS%3C/text%3E%3C/svg%3E" 
-                   alt="FLAG{inspect_element_is_your_friend}">
+                    alt="Profile of Alex - UdG Computer Science student">
             </div>
             <h3 class="member-name">Alex Smith</h3>
-            <p class="member-role">Lead Organizer</p>
-            <p class="member-bio">Passionate about cloud technologies and building amazing communities.</p>
+            <p class="member-role">Lead Organizer & UdG Student</p>
+            <p class="member-bio">
+              Computer Science student at UdG who survives on cafeteria chocolate triangles during exam season. 
+              <span style="display:none;" data-snack="triangles_de_xocolata">
+                Pro tip: Best enjoyed with coffee at 8 AM before databases class.
+              </span>
+              Passionate about cloud technologies and building communities!
+            </p>
             <div class="social-links">
               <a href="#" class="social-link">
                 <i class="material-icons-round">link</i>
@@ -119,6 +125,7 @@
               </a>
             </div>
           </div>
+          <!-- For the hungry students: FLAG{triangles_de_xocolata} -->
 
           <div class="team-member">
             <div class="member-avatar">
@@ -152,11 +159,14 @@
         </div>
       </section>
 
-      <!-- Hidden element for CSS inspection flag -->
-      <div class="secret-message" data-flag="FLAG{hidden_in_plain_sight}" style="display:none;position:absolute;opacity:0;">
-        This element is hidden but contains a flag in its data attribute!
-      </div>
-    </div>
+      <!-- Hidden Image Challenge -->
+      <section style="display:none;">
+        <!-- Students need to find this in the page source -->
+        <img src="mystery_challenge.png" 
+            alt="Final challenge" 
+            data-hint="This image holds the final secret. Use steganography tools or check EXIF metadata.">
+      </section>
+      <!-- Hint for persistent students: Check mystery_challenge.png metadata -->
   </main>
 
   <!-- Footer -->

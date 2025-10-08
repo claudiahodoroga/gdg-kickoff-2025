@@ -11,6 +11,17 @@
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/shared.css">
   <link rel="stylesheet" href="css/index.css">
+  <style>
+    #passwordHelp {
+      margin-top: 8px;
+      padding: 12px;
+      background: rgba(255, 255, 255, 0.03);
+      border-radius: 8px;
+      font-size: 0.75rem;
+      line-height: 1.6;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+  </style>
 </head>
 <body>
   <!-- Hero Section -->
@@ -58,24 +69,35 @@
               required
               minlength="3"
               maxlength="20"
-              pattern="[a-zA-Z0-9_-]+"
               autocomplete="username"
               aria-describedby="usernameHelp"
             >
-            <small id="usernameHelp" style="color: rgba(255,255,255,0.6); font-size: 0.75rem;">3-20 characters, letters, numbers, - and _ only</small>
+            <small id="usernameHelp" style="color: rgba(255,255,255,0.6); font-size: 0.75rem;">
+              Must contain: 3-20 chars, at least one vowel, one uppercase letter
+            </small>
           </div>
           <div class="form-group">
-            <label for="registerPassword">Password</label>
+            <label for="registerPassword">Password <span style="color: rgba(234, 67, 53, 0.9);">*</span></label>
             <input 
               type="password" 
               id="registerPassword" 
-              placeholder="Create a password" 
+              placeholder="Good luck..." 
               required
-              minlength="6"
+              minlength="10"
               autocomplete="new-password"
               aria-describedby="passwordHelp"
             >
-            <small id="passwordHelp" style="color: rgba(255,255,255,0.6); font-size: 0.75rem;">Minimum 6 characters</small>
+            <div id="passwordHelp" style="color: rgba(255,255,255,0.6); font-size: 0.75rem;">
+              <div style="margin:4px 0;">🔒 At least 10 characters</div>
+              <div style="margin:4px 0;">🔤 At least one uppercase letter</div>
+              <div style="margin:4px 0;">🔡 At least one lowercase letter</div>
+              <div style="margin:4px 0;">🔢 At least one number</div>
+              <div style="margin:4px 0;">✨ At least one special character (!@#$%^&*)</div>
+              <div style="margin:4px 0;">👤 At least one letter from your username</div>
+              <div style="margin:4px 0;">🧮 Digits must sum to at least 20</div>
+              <div style="margin:4px 0;">📅 Must include current month number (10)</div>
+              <div style="margin:4px 0;">🚫 Cannot contain the word "password"</div>
+            </div>
           </div>
           <button type="submit" class="btn-primary">Register</button>
         </form>

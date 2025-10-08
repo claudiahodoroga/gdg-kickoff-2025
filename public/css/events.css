@@ -5,7 +5,6 @@
   background: linear-gradient(135deg, var(--color-dark-surface) 0%, var(--color-dark) 100%);
   padding: var(--spacing-xxl) var(--spacing-xl);
   border-radius: var(--border-radius-xl);
-  margin-top: 0;
   margin-bottom: var(--spacing-xxl);
   text-align: center;
   position: relative;
@@ -46,23 +45,29 @@
   z-index: 1;
 }
 
+/* Events Section */
+.events-section {
+  margin-bottom: var(--spacing-xxl);
+}
+
 /* Events Grid */
 .events-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
   gap: var(--spacing-xl);
-  margin-bottom: var(--spacing-xxl);
 }
 
 /* Event Card */
 .event-card {
   background: var(--color-dark-surface);
   border-radius: var(--border-radius-lg);
-  overflow: hidden;
+  overflow: visible;
   position: relative;
   transition: var(--transition-base);
   border: 1px solid rgba(255, 255, 255, 0.1);
   animation: slideIn 0.3s ease-out;
+  display: flex;
+  flex-direction: column;
 }
 
 .event-card:hover {
@@ -77,25 +82,26 @@
   right: var(--spacing-md);
   background: var(--color-google-blue);
   color: var(--color-white);
-  padding: 4px var(--spacing-sm);
+  padding: 6px var(--spacing-md);
   border-radius: var(--border-radius-sm);
   font-size: 0.75rem;
   font-weight: 500;
   text-transform: uppercase;
   letter-spacing: 1px;
-  z-index: 1;
+  z-index: 2;
 }
 
 .event-date {
+  position: absolute;
+  top: var(--spacing-md);
+  left: var(--spacing-md);
   background: var(--color-google-blue);
   color: var(--color-white);
   padding: var(--spacing-md);
   text-align: center;
-  width: 80px;
-  position: absolute;
-  top: var(--spacing-md);
-  left: var(--spacing-md);
+  width: 70px;
   border-radius: var(--border-radius-md);
+  z-index: 2;
 }
 
 .date-day {
@@ -107,7 +113,7 @@
 
 .date-month {
   display: block;
-  font-size: 0.875rem;
+  font-size: 0.75rem;
   font-weight: 500;
   text-transform: uppercase;
   margin-top: 4px;
@@ -115,12 +121,10 @@
 
 .event-content {
   padding: var(--spacing-xl);
-  padding-top: calc(var(--spacing-xl) + 40px);
-}
-
-/* Ajustes para el espacio entre la fecha y el título */
-.event-content {
-  padding-top: var(--spacing-lg);
+  padding-top: calc(70px + var(--spacing-lg));
+  flex: 1;
+  display: flex;
+  flex-direction: column;
 }
 
 .event-title {
@@ -135,7 +139,8 @@
   color: rgba(255, 255, 255, 0.7);
   margin-bottom: var(--spacing-lg);
   line-height: 1.6;
-  font-size: 14px;
+  font-size: 0.875rem;
+  flex: 1;
 }
 
 .event-meta {
@@ -264,14 +269,6 @@
 /* CTA Section */
 .cta-section {
   margin-bottom: var(--spacing-xxl);
-  padding: var(--spacing-xxl) var(--spacing-xl);
-}
-
-/* Ajustes para centrar el contenido y limitar el ancho */
-.events-hero, .events-grid, .cta-section {
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: var(--spacing-xl);
 }
 
 .cta-card {
@@ -294,7 +291,7 @@
 .cta-card p {
   color: rgba(255, 255, 255, 0.7);
   margin-bottom: var(--spacing-xl);
-  font-size: 14px;
+  font-size: 0.875rem;
 }
 
 .subscribe-form {
@@ -376,7 +373,7 @@
 
   .event-content {
     padding: var(--spacing-lg);
-    padding-top: calc(var(--spacing-xl) + 40px);
+    padding-top: calc(70px + var(--spacing-md));
   }
 
   .subscribe-form {
@@ -400,14 +397,13 @@
   .cta-card {
     padding: var(--spacing-xl);
   }
-}
-
-/* Ajustes para eliminar el relleno superior extraño */
-.events-hero {
-  padding-top: var(--spacing-xl);
-}
-
-/* Ajustes para el relleno lateral en la sección de eventos destacados */
-.past-events-highlights {
-  padding: 0 var(--spacing-xl);
+  
+  .event-date {
+    width: 60px;
+    padding: var(--spacing-sm);
+  }
+  
+  .date-day {
+    font-size: 1.25rem;
+  }
 }
