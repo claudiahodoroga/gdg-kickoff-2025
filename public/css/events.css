@@ -5,6 +5,7 @@
   background: linear-gradient(135deg, var(--color-dark-surface) 0%, var(--color-dark) 100%);
   padding: var(--spacing-xxl) var(--spacing-xl);
   border-radius: var(--border-radius-xl);
+  margin-top: 0;
   margin-bottom: var(--spacing-xxl);
   text-align: center;
   position: relative;
@@ -258,6 +259,7 @@
 /* CTA Section */
 .cta-section {
   margin-bottom: var(--spacing-xxl);
+  padding: var(--spacing-xxl) var(--spacing-xl);
 }
 
 .cta-card {

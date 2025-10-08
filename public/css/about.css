@@ -7,11 +7,11 @@
     var(--color-dark-surface) 0%, 
     var(--color-dark) 100%
   );
-  padding: var(--spacing-xxl) 0;
+  padding: var(--spacing-xxl) var(--spacing-xl);
   text-align: center;
   overflow: hidden;
   border-radius: var(--border-radius-xl);
-  margin-bottom: var(--spacing-xxl);
+  margin-top: 0;
 }
 
 .about-hero::before {
@@ -64,6 +64,7 @@
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: var(--spacing-xl);
   margin-bottom: var(--spacing-xxl);
+  padding: var(--spacing-xl);
 }
 
 .mission-card {
@@ -132,7 +133,7 @@
 .team-section {
   background: var(--color-dark-surface);
   border-radius: var(--border-radius-xl);
-  padding: var(--spacing-xxl);
+  padding: var(--spacing-xxl) var(--spacing-xl);
   margin-bottom: var(--spacing-xxl);
 }
 
