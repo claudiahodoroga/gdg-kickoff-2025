@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ca">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Events - GDG CTF 2025</title>
+  <title>Esdeveniments - GDG CTF 2025</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
@@ -17,22 +17,22 @@
     <div class="nav-container">
       <div class="nav-logo">GDG <span class="text-gradient">CTF</span></div>
       <ul class="nav-links">
-        <li><a href="dashboard.html">Dashboard</a></li>
-        <li><a href="about.html">About GDG</a></li>
-        <li><a href="events.html" class="active">Events</a></li>
-        <li><button id="navLogout" class="button button-secondary" style="height:40px;padding:8px 14px;">Logout</button></li>
+        <li><a href="dashboard.html">Tauler de control</a></li>
+        <li><a href="about.html">Sobre GDG</a></li>
+        <li><a href="events.html" class="active">Esdeveniments</a></li>
+        <li><button id="navLogout" class="button button-secondary" style="height:40px;padding:8px 14px;">Tancar sessió</button></li>
       </ul>
     </div>
   </nav>
 
-  <!-- Main Content -->
-  <main class="main-content">
+  <!-- Contingut Principal -->
+  <main class="mdc-top-app-bar--fixed-adjust">
     <div class="dashboard-container">
       <!-- Hero Section -->
       <section class="events-hero">
-        <h1 class="page-title">Upcoming <span class="text-gradient">Events</span></h1>
+        <h1 class="page-title">Propers <span class="text-gradient">Esdeveniments</span></h1>
         <p class="page-subtitle">
-          Join us for exciting workshops, talks, and networking opportunities in the world of technology
+          Uneix-te a nosaltres per a tallers, xerrades i oportunitats de networking en el món de la tecnologia.
         </p>
       </section>
 
@@ -41,147 +41,108 @@
         <div class="events-grid">
           <!-- Event Card 1 -->
           <div class="event-card featured">
-            <div class="event-badge">Featured</div>
+            <div class="event-badge">Destacat</div>
             <div class="event-date">
-              <span class="date-day">15</span>
+              <span class="date-day">17</span>
               <span class="date-month">OCT</span>
             </div>
             <div class="event-content">
-              <h3 class="event-title">Introduction to Cloud Computing</h3>
+              <h3 class="event-title">Xerrada de Ciberseguretat</h3>
               <p class="event-description">
-                Learn the fundamentals of cloud computing with Google Cloud Platform. 
-                Perfect for beginners looking to understand cloud architecture.
+                Descobreix les últimes tendències en ciberseguretat amb Lila Landa. Ideal per a estudiants i professionals interessats en la seguretat informàtica.
               </p>
-              <div class="event-meta">
-                <span class="event-time">
-                  <i class="material-icons-round">schedule</i>
-                  6:00 PM - 8:00 PM
-                </span>
-                <span class="event-location">
-                  <i class="material-icons-round">location_on</i>
-                  Tech Hub Room 201
-                </span>
-              </div>
               <button class="btn-event">
                 <i class="material-icons-round">how_to_reg</i>
-                Register Now
+                Registra't ara
               </button>
             </div>
           </div>
-
+ 
+        </ul>
           <!-- Event Card 2 -->
           <div class="event-card">
             <div class="event-date">
-              <span class="date-day">22</span>
-              <span class="date-month">OCT</span>
+              <span class="date-day">15</span>
+              <span class="date-month">NOV</span>
             </div>
             <div class="event-content">
-              <h3 class="event-title">Android Development Workshop</h3>
+              <h3 class="event-title">DevFest 2025</h3>
               <p class="event-description">
-                Build your first Android app using Kotlin and Android Studio. 
-                Hands-on session with live coding and Q&A.
+                L'esdeveniment més gran de l'any amb xerrades, tallers i oportunitats de networking amb professionals de la indústria.
               </p>
-              <div class="event-meta">
-                <span class="event-time">
-                  <i class="material-icons-round">schedule</i>
-                  2:00 PM - 5:00 PM
-                </span>
-                <span class="event-location">
-                  <i class="material-icons-round">location_on</i>
-                  Computer Lab B
-                </span>
-              </div>
-              <button class="btn-event">Register Now</button>
+              <!-- FLAG{???_girona_2025} - No t'ho perdis! -->
+              <button class="btn-event">Registra't ara</button>
             </div>
           </div>
 
           <!-- Event Card 3 -->
           <div class="event-card">
             <div class="event-date">
-              <span class="date-day">29</span>
-              <span class="date-month">OCT</span>
+              <span class="date-day">MAR</span>
+              <span class="date-month">2026</span>
             </div>
             <div class="event-content">
-              <h3 class="event-title">Machine Learning Basics</h3>
+              <h3 class="event-title">Dia de la Dona</h3>
               <p class="event-description">
-                Introduction to machine learning concepts and TensorFlow. 
-                Learn how to build and train your first ML model.
+                Celebrem el Dia de la Dona amb xerrades inspiradores i tallers pràctics liderats per dones en tecnologia.
               </p>
-              <div class="event-meta">
-                <span class="event-time">
-                  <i class="material-icons-round">schedule</i>
-                  4:00 PM - 6:00 PM
-                </span>
-                <span class="event-location">
-                  <i class="material-icons-round">videocam</i>
-                  Online via Meet
-                </span>
-              </div>
-              <button class="btn-event">Register Now</button>
+              <button class="btn-event">Registra't ara</button>
             </div>
           </div>
 
           <!-- Event Card 4 -->
-          <div class="event-card" style="border: 2px solid var(--color-google-yellow);">
-            <div class="event-badge">After Hours 🎵</div>
+          <div class="event-card">
             <div class="event-date">
-              <span class="date-day">🎉</span>
-              <span class="date-month">THU</span>
+              <span class="date-day">MAI</span>
+              <span class="date-month">2026</span>
             </div>
             <div class="event-content">
-              <h3 class="event-title">Post-DevFest Celebration</h3>
+              <h3 class="event-title">Google I/O Watch Party</h3>
               <p class="event-description">
-                After all the tech talks, where do Girona students celebrate? 
-                <strong>Hint:</strong> It's a Thursday tradition at the most popular student venue. 
-                The flag format is: FLAG{venue_day_type} (in Catalan, all lowercase, underscores).
+                Uneix-te a nosaltres per veure junts el Google I/O anual, compartir idees i fer networking mentre gaudim d'un àpat.
               </p>
-              <div class="event-meta">
-                <span class="event-time">
-                  <i class="material-icons-round">schedule</i>
-                  Dijous universitari!
-                </span>
-                <span class="event-location">
-                  <i class="material-icons-round">celebration</i>
-                  The legendary student spot
-                </span>
-              </div>
-              <button class="btn-event" onclick="alert('Think about where UdG students go on Thursday nights... 💃')">
-                Need a bigger hint?
-              </button>
+              <button class="btn-event">Registra't ara</button>
             </div>
           </div>
-          <!-- FLAG{platea_dijous_universitari} -->
 
+          <!-- Event Card 5 -->
+          <div class="event-card">
+            <div class="event-date">
+              <span class="date-day">JUN</span>
+              <span class="date-month">2026</span>
+            </div>
+            <div class="event-content">
+              <h3 class="event-title">Build with AI</h3>
+              <p class="event-description">
+                Tallers pràctics amb Google Developer Experts sobre IA i com integrar-les en els teus projectes.
+              </p>
+              <button class="btn-event">Registra't ara</button>
+            </div>
+          </div>
         </div>
       </section>
 
       <!-- Past Events Gallery -->
       <section class="gallery-section">
-        <h2 class="section-title">Past Events Highlights</h2>
+        <h2 class="section-title">Moments destacats</h2>
         <div class="gallery-grid">
           <div class="gallery-item">
             <div class="gallery-image" style="background: linear-gradient(135deg, #3285F5 0%, #57CAFF 100%);">
-              <span class="gallery-placeholder">Workshop Session</span>
+              <span class="gallery-placeholder">Game Jam</span>
             </div>
-            <p class="gallery-caption">Cloud Computing Workshop - September 2025</p>
+            <p class="gallery-caption">"Flip It!" Game Jam - Agost 2025</p>
           </div>
           <div class="gallery-item">
             <div class="gallery-image" style="background: linear-gradient(135deg, #F9AB00 0%, #EA4335 100%);">
-              <span class="gallery-placeholder">Networking Event</span>
+              <span class="gallery-placeholder">Taller d'IA</span>
             </div>
-            <p class="gallery-caption">Tech Meetup & Networking - August 2025</p>
+            <p class="gallery-caption">AI Applications Workshop - Juny 2025</p>
           </div>
           <div class="gallery-item">
             <div class="gallery-image" style="background: linear-gradient(135deg, #57CAFF 0%, #C3ECF6 100%);">
-              <span class="gallery-placeholder">Hackathon Team</span>
+              <span class="gallery-placeholder">Hacking Ètic</span>
             </div>
-            <p class="gallery-caption">Summer Hackathon Winners - July 2025</p>
-          </div>
-          <div class="gallery-item">
-            <div class="gallery-image" style="background: linear-gradient(135deg, #EA4335 0%, #F9AB00 100%);">
-              <span class="gallery-placeholder">Speaker Session</span>
-            </div>
-            <p class="gallery-caption">Guest Speaker from Google - June 2025</p>
+            <p class="gallery-caption">Taller de Hacking Ètic - Abril 2025</p>
           </div>
         </div>
       </section>
@@ -189,11 +150,11 @@
       <!-- CTA Section -->
       <section class="cta-section">
         <div class="cta-card">
-          <h2>Want to stay updated?</h2>
-          <p>Join our mailing list to receive event notifications and exclusive content</p>
+          <h2>Vols estar al dia?</h2>
+          <p>Uneix-te a la nostra llista de correu per rebre notificacions d'esdeveniments i contingut exclusiu</p>
           <form class="subscribe-form" id="subscribeForm">
-            <input type="email" placeholder="Enter your email" required>
-            <button type="submit" class="btn-subscribe">Subscribe</button>
+            <input type="email" placeholder="Introdueix el teu correu electrònic" required>
+            <button type="submit" class="btn-subscribe">Subscriu-te</button>
           </form>
         </div>
       </section>
@@ -202,37 +163,41 @@
 
   <!-- Footer -->
   <footer class="footer">
-    <p>&copy; 2025 Google Developer Groups. All rights reserved.</p>
+    <p>&copy; 2025 Google Developer Groups. Tots els drets reservats.</p>
   </footer>
 
 <script src="app.js"></script>
 <script>
-// Console flag for Events page with Game of Thrones hint
+// Pista: Mira la consola!
 if (window.location.pathname.includes('events.html') || 
     window.location.pathname.endsWith('events.html') || 
     document.title.includes('Events')) {
   
-  console.log('%c╔════════════════════════════════════════════╗', 'color: #F9AB00; font-weight: bold; font-size: 12px;');
-  console.log('%c║  🏰 GIRONA FILMING LOCATION TRIVIA 🏰     ║', 'color: #F9AB00; font-weight: bold; font-size: 12px;');
-  console.log('%c║                                            ║', 'color: #F9AB00; font-size: 12px;');
-  console.log('%c║  In 2016, Girona\'s medieval streets and   ║', 'color: #3285F5; font-size: 11px;');
-  console.log('%c║  cathedral became King\'s Landing and       ║', 'color: #3285F5; font-size: 11px;');
-  console.log('%c║  Braavos for Game of Thrones Season 6.    ║', 'color: #3285F5; font-size: 11px;');
-  console.log('%c║                                            ║', 'color: #F9AB00; font-size: 12px;');
-  console.log('%c║  🎬 Fun fact: The Sept stairs scene was   ║', 'color: #57CAFF; font-size: 11px;');
-  console.log('%c║  filmed at Girona Cathedral!               ║', 'color: #57CAFF; font-size: 11px;');
-  console.log('%c║                                            ║', 'color: #F9AB00; font-size: 12px;');
-  console.log('%c║  Hint: What famous GoT phrase + location? ║', 'color: #EA4335; font-size: 11px; font-style: italic;');
-  console.log('%c║  FLAG{winter_came_to_girona}              ║', 'color: #EA4335; font-weight: bold; font-size: 13px;');
-  console.log('%c╚════════════════════════════════════════════╝', 'color: #F9AB00; font-weight: bold; font-size: 12px;');
+  console.log('%c╔═══════════════════════════════════════════╗', 'color: #F9AB00; font-weight: bold; font-size: 12px;');
+  console.log('%c║  🏰 CURIOSITAT SOBRE GIRONA 🏰           ║', 'color: #F9AB00; font-weight: bold; font-size: 12px;');
+  console.log('%c║                                           ║', 'color: #F9AB00; font-size: 12px;');
+  console.log('%c║  El 2016, els carrers medievals i la      ║', 'color: #3285F5; font-size: 11px;');
+  console.log('%c║  catedral de Girona es van convertir en   ║', 'color: #3285F5; font-size: 11px;');
+  console.log('%c║  escenari de rodatge d\'una famosa sèrie  ║', 'color: #3285F5; font-size: 11px;');
+  console.log('%c║  de televisió de fantasia medieval.       ║', 'color: #3285F5; font-size: 11px;');
+  console.log('%c║                                           ║', 'color: #F9AB00; font-size: 12px;');
+  console.log('%c║  🎬 La catedral va ser l\'escenari de     ║', 'color: #57CAFF; font-size: 11px;');
+  console.log('%c║  la famosa escena de les escales!         ║', 'color: #57CAFF; font-size: 11px;');
+  console.log('%c║                                           ║', 'color: #F9AB00; font-size: 12px;');
+  console.log('%c║  Pista: Quin és el nom en anglès          ║', 'color: #EA4335; font-size: 11px; font-style: italic;');
+  console.log('%c║  d\'aquesta sèrie icònica? (tot en        ║', 'color: #EA4335; font-size: 11px; font-style: italic;');
+  console.log('%c║  minúscules, amb guions baixos)           ║', 'color: #EA4335; font-size: 11px; font-style: italic;');
+  console.log('%c║                                           ║', 'color: #F9AB00; font-size: 12px;');
+  console.log('%c║  FLAG{??_of_??}                           ║', 'color: #EA4335; font-weight: bold; font-size: 13px;');
+  console.log('%c╚═══════════════════════════════════════════╝', 'color: #F9AB00; font-weight: bold; font-size: 12px;');
   
-  console.log('%c\n🎯 CTF Tip: Explore the Network tab too!\n', 'color: #0F9D58; font-size: 12px; font-weight: bold;');
+  console.log('%c\n🎯 Consell CTF: Explora també la pestanya Network!\n', 'color: #0F9D58; font-size: 12px; font-weight: bold;');
 }
 
 // Subscribe form handler
 document.getElementById('subscribeForm').addEventListener('submit', (e) => {
   e.preventDefault();
-  alert('Thanks for subscribing! Check your email for confirmation.');
+  alert('Gràcies per subscriure\'t! Comprova el teu correu electrònic per a la confirmació.');
   e.target.reset();
 });
 </script>

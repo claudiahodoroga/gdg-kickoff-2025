@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ca">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Dashboard - GDG CTF 2025</title>
+  <title>Tauler de control - GDG CTF 2025</title>
 
   <!-- Fonts & Icons -->
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
@@ -19,25 +19,25 @@
   <!-- Top App Bar -->
   <nav id="mainNav" class="glass-effect" style="position:sticky;top:0;z-index:var(--z-index-header);backdrop-filter:saturate(1.2) blur(10px);">
     <div class="nav-container">
-      <div class="nav-logo">GDG <span class="text-gradient">CTF</span></div>
+      <div class="nav-logo">GDG Girona<span class="text-gradient">CTF</span></div>
       <ul class="nav-links">
-        <li><a href="dashboard.html" class="active">Dashboard</a></li>
-        <li><a href="about.html">About GDG</a></li>
-        <li><a href="events.html">Events</a></li>
-        <li><button id="navLogout" class="button button-secondary" style="height:40px;padding:8px 14px;">Logout</button></li>
+        <li><a href="dashboard.html" class="active">Tauler de control</a></li>
+        <li><a href="about.html">Sobre GDG</a></li>
+        <li><a href="events.html">Esdeveniments</a></li>
+        <li><button id="navLogout" class="button button-secondary" style="height:40px;padding:8px 14px;">Tancar sessió</button></li>
       </ul>
     </div>
   </nav>
 
   <main class="mdc-top-app-bar--fixed-adjust">
     <div class="dashboard-container">
-      <!-- Stats -->
+      <!-- Estadístiques -->
       <section class="stats-grid">
         <article class="stat-card card">
           <div class="stat-icon blue"><i class="material-icons-round">military_tech</i></div>
           <div class="stat-content">
             <div class="stat-value" id="totalPoints">0</div>
-            <div class="stat-label">Total Points</div>
+            <div class="stat-label">Punts Totals</div>
           </div>
         </article>
 
@@ -45,7 +45,7 @@
           <div class="stat-icon green"><i class="material-icons-round">flag</i></div>
           <div class="stat-content">
             <div class="stat-value" id="flagsFound">0</div>
-            <div class="stat-label">Flags Found</div>
+            <div class="stat-label">Flags Trobades</div>
           </div>
         </article>
 
@@ -53,15 +53,15 @@
           <div class="stat-icon yellow"><i class="material-icons-round">leaderboard</i></div>
           <div class="stat-content">
             <div class="stat-value" id="globalRank">--</div>
-            <div class="stat-label">Global Rank</div>
+            <div class="stat-label">Rànquing Global</div>
           </div>
         </article>
       </section>
 
-      <!-- Flag Submission -->
+      <!-- Enviament de Flags -->
       <section class="flag-section card">
-        <h2 class="section-title">Submit Flag</h2>
-        <p class="section-subtitle">Found a flag? Submit it here to earn points!</p>
+        <h2 class="section-title">Envia una Flag</h2>
+        <p class="section-subtitle">Has trobat una flag? Envia-la aquí per guanyar punts!</p>
 
         <form id="flagForm" class="flag-form" novalidate>
           <div class="flag-input-group">
@@ -70,25 +70,25 @@
               type="text"
               id="flagInput"
               class="input-field flag-input"
-              placeholder="FLAG{enter_your_flag_here}"
+              placeholder="FLAG{introdueix_la_teva_flag_aquí}"
               required
               pattern="FLAG\{.*\}"
             />
           </div>
           <button type="submit" class="button button-primary">
-            <i class="material-icons-round">send</i> Submit Flag
+            <i class="material-icons-round">send</i> Envia Flag
           </button>
-          <p class="hint">Format: <code>FLAG{text_here}</code></p>
+          <p class="hint">Format: <code>FLAG{text_aquí}</code></p>
         </form>
 
         <div id="scoreboardMessage" class="message" role="alert" style="display:none;"></div>
       </section>
 
-      <!-- Leaderboard -->
+      <!-- Classificació -->
       <section class="leaderboard-section card">
         <div class="leaderboard-header">
-          <h2 class="leaderboard-title"><i class="material-icons-round">emoji_events</i> Leaderboard</h2>
-          <button id="refreshBtn" class="button button-secondary" title="Refresh">
+          <h2 class="leaderboard-title"><i class="material-icons-round">emoji_events</i> Classificació</h2>
+          <button id="refreshBtn" class="button button-secondary" title="Actualitza">
             <i class="material-icons-round">refresh</i>
           </button>
         </div>
@@ -97,15 +97,15 @@
           <table class="leaderboard-table" id="scoreboardTable" aria-live="polite">
             <thead>
               <tr>
-                <th>Rank</th>
-                <th>Player</th>
-                <th>Score</th>
+                <th>Rànquing</th>
+                <th>Jugador</th>
+                <th>Puntuació</th>
               </tr>
             </thead>
             <tbody>
               <tr>
                 <td colspan="3" style="text-align:center;padding:2rem;color:rgba(255,255,255,0.5);">
-                  Loading scoreboard...
+                  Carregant classificació...
                 </td>
               </tr>
             </tbody>
@@ -113,26 +113,25 @@
         </div>
       </section>
 
-      <!-- CTF Tips -->
+      <!-- Consells per al CTF -->
       <section class="tips-section card">
-        <h3 class="section-title"><i class="material-icons-round">lightbulb</i> CTF Tips & Welcome!</h3>
+        <h3 class="section-title"><i class="material-icons-round">lightbulb</i> Consells per al CTF</h3>
         <ul class="tips-list">
-          <li>🎉 <strong style="color: var(--color-google-blue);">Welcome to GDG Girona CTF!</strong> Right-click this text and "Inspect" to find your first flag!</li>
-          <li>🔍 Use browser Developer Tools (F12) to inspect elements</li>
-          <li>📄 Check page source (Ctrl+U) for hidden comments</li>
-          <li>🎨 Inspect CSS and HTML attributes carefully</li>
-          <li>💬 Keep an eye on the browser console</li>
-          <li>🌐 Check the Network tab for API calls</li>
-          <li>🧩 Explore all pages thoroughly</li>
-        </ul>
-        <!-- Congrats! You're ready for DevFest Girona 2025! FLAG{devfest_girona_2025} -->
+          <!-- FLAG{kickoff_gdg_2025} - Has trobat la teva primera flag! Ja estàs a punt per a aquest CTF. -->
+          <li>🎉 <strong style="color: var(--color-google-blue);">Benvingut al GDG Girona CTF!</strong> Fes clic dret en aquest text i "Inspecciona" per trobar la teva primera flag!</li>
+          <li>🔍 Utilitza les eines de desenvolupador del navegador (F12) per inspeccionar elements</li>
+          <li>📄 Revisa el codi font de la pàgina (Ctrl+U) per trobar comentaris ocults</li>
+          <li>🎨 Inspecciona els atributs CSS i HTML amb cura</li>
+          <li>💬 Mantingues un ull al console del navegador</li>
+          <li>🌐 Revisa la pestanya de Xarxa per a crides API</li>
+          <li>🧩 Explora totes les pàgines a fons</li>
       </section>
     </div>
   </main>
 
   <!-- Footer -->
   <footer class="footer">
-    <p>&copy; 2025 Google Developer Groups. All rights reserved.</p>
+    <p>&copy; 2025 Google Developer Groups. Tots els drets reservats.</p>
   </footer>
 
   <script src="app.js"></script>

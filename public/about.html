@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ca">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>About GDG - GDG CTF 2025</title>
+  <title>Sobre GDG - GDG CTF 2025</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
@@ -17,53 +17,55 @@
     <div class="nav-container">
       <div class="nav-logo">GDG <span class="text-gradient">CTF</span></div>
       <ul class="nav-links">
-        <li><a href="dashboard.html">Dashboard</a></li>
-        <li><a href="about.html" class="active">About GDG</a></li>
-        <li><a href="events.html">Events</a></li>
-        <li><button id="navLogout" class="button button-secondary" style="height:40px;padding:8px 14px;">Logout</button></li>
+        <li><a href="dashboard.html">Tauler de control</a></li>
+        <li><a href="about.html" class="active">Sobre GDG</a></li>
+        <li><a href="events.html">Esdeveniments</a></li>
+        <li><button id="navLogout" class="button button-secondary" style="height:40px;padding:8px 14px;">Tancar sessió</button></li>
       </ul>
     </div>
   </nav>
 
   <!-- Main Content -->
-  <main>
+  <main class="mdc-top-app-bar--fixed-adjust">
     <div class="dashboard-container">
       <!-- Hero Section -->
       <section class="about-hero">
         <div class="hero-content">
-          <h1 class="about-title">About <span class="text-gradient">GDG</span></h1>
+          <h1 class="about-title">Sobre el <span class="text-gradient">GDG Girona</span></h1>
           <p class="about-subtitle">
-            Building a community of innovators, developers, and problem solvers through collaborative learning and challenges
+            Fundat el 2022, el GDG Girona és una comunitat vibrant que connecta estudiants i professionals per explorar la tecnologia de Google i més enllà.
           </p>
         </div>
       </section>
 
       <!-- FLAG{welcome_to_gdg_ctf} - Hidden in HTML comment -->
-      
+      <!-- FLAG{kickoff_gdg_2025} - Benvingut al GDG Girona CTF! -->
+      <!-- FLAG{pont_de_ferro} - Pista: Explora la pestanya de Xarxa per descobrir un pont històric construït el 1877. -->
+
       <!-- Mission Section -->
       <section class="mission-section">
         <div class="mission-card">
           <div class="mission-icon">
             <i class="material-icons-round">rocket_launch</i>
           </div>
-          <h2 class="mission-title">Our Mission</h2>
-          <p class="mission-text">To create a vibrant community of developers through hands-on learning, innovative challenges, and collaborative projects.</p>
+          <h2 class="mission-title">La nostra missió</h2>
+          <p class="mission-text">Portar la innovació tecnològica a la UdG i més enllà, fomentant una cultura d'aprenentatge pràctic i col·laboratiu.</p>
         </div>
 
         <div class="mission-card">
           <div class="mission-icon">
             <i class="material-icons-round">lightbulb</i>
           </div>
-          <h2 class="mission-title">Our Vision</h2>
-          <p class="mission-text">To become the leading platform for technical education and skill development in Google technologies.</p>
+          <h2 class="mission-title">El nostre suport</h2>
+          <p class="mission-text">Google ens proporciona recursos educatius, ponents experts, pressupost per a esdeveniments i accés a eines exclusives.</p>
         </div>
 
         <div class="mission-card">
           <div class="mission-icon">
             <i class="material-icons-round">diversity_3</i>
           </div>
-          <h2 class="mission-title">Our Community</h2>
-          <p class="mission-text">A diverse and inclusive group of technology enthusiasts working together to learn, share, and grow.</p>
+          <h2 class="mission-title">La nostra comunitat</h2>
+          <p class="mission-text">Oberta a tothom, no cal que estudiïs una carrera STEM. La tecnologia és per a tothom!</p>
         </div>
       </section>
 
@@ -71,90 +73,66 @@
       <section class="values-grid">
         <div class="value-card">
           <i class="material-icons-round value-icon">code</i>
-          <h3 class="value-title">Technical Excellence</h3>
-          <p class="value-text">We strive for excellence in all our technical endeavors and learning initiatives.</p>
+          <h3 class="value-title">Excel·lència tècnica</h3>
+          <p class="value-text">Ens esforcem per assolir l'excel·lència en totes les nostres iniciatives tècniques i d'aprenentatge.</p>
         </div>
 
         <div class="value-card">
           <i class="material-icons-round value-icon">school</i>
-          <h3 class="value-title">Continuous Learning</h3>
-          <p class="value-text">We believe in lifelong learning and staying current with the latest technologies.</p>
+          <h3 class="value-title">Aprenentatge continu</h3>
+          <p class="value-text">Creiem en l'aprenentatge al llarg de la vida i en mantenir-nos al dia amb les últimes tecnologies.</p>
         </div>
 
         <div class="value-card">
           <i class="material-icons-round value-icon">diversity_1</i>
-          <h3 class="value-title">Inclusive Community</h3>
-          <p class="value-text">We welcome members from all backgrounds and skill levels to join our community.</p>
+          <h3 class="value-title">Comunitat inclusiva</h3>
+          <p class="value-text">Donem la benvinguda a membres de tots els orígens i nivells de competència.</p>
         </div>
 
         <div class="value-card">
           <i class="material-icons-round value-icon">handshake</i>
-          <h3 class="value-title">Collaboration</h3>
-          <p class="value-text">We encourage teamwork and knowledge sharing among our members.</p>
+          <h3 class="value-title">Col·laboració</h3>
+          <p class="value-text">Fomentem el treball en equip i l'intercanvi de coneixements entre els nostres membres.</p>
         </div>
       </section>
 
       <!-- Team Section -->
       <section class="team-section">
         <div class="section-header">
-          <h2 class="section-title">Meet Our Team</h2>
-          <p class="section-description">The passionate individuals who make GDG possible</p>
+          <h2 class="section-title">Coneix el nostre equip</h2>
+          <p class="section-description">Els estudiants i professionals que fan possible el GDG Girona</p>
         </div>
 
         <div class="team-grid">
           <div class="team-member">
             <div class="member-avatar">
-              <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Crect fill='%233285F5' width='120' height='120'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-size='48' fill='white' font-family='Arial'%3EAS%3C/text%3E%3C/svg%3E" 
-                    alt="Profile of Alex - UdG Computer Science student">
+              <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Crect fill='%23EA4335' width='120' height='120'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-size='48' fill='white' font-family='Arial'%3ELL%3C/text%3E%3C/svg%3E" 
+                    alt="Perfil de Lila Landa">
             </div>
-            <h3 class="member-name">Alex Smith</h3>
-            <p class="member-role">Lead Organizer & UdG Student</p>
-            <p class="member-bio">
-              Computer Science student at UdG who survives on cafeteria chocolate triangles during exam season. 
-              <span style="display:none;" data-snack="triangles_de_xocolata">
-                Pro tip: Best enjoyed with coffee at 8 AM before databases class.
-              </span>
-              Passionate about cloud technologies and building communities!
-            </p>
-            <div class="social-links">
-              <a href="#" class="social-link">
-                <i class="material-icons-round">link</i>
-              </a>
-              <a href="#" class="social-link">
-                <i class="material-icons-round">public</i>
-              </a>
-            </div>
-          </div>
-          <!-- For the hungry students: FLAG{triangles_de_xocolata} -->
-
-          <div class="team-member">
-            <div class="member-avatar">
-              <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Crect fill='%2357CAFF' width='120' height='120'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-size='48' fill='white' font-family='Arial'%3EJD%3C/text%3E%3C/svg%3E" 
-                   alt="Profile photo of Jordan Davis">
-            </div>
-            <h3 class="member-name">Jordan Davis</h3>
-            <p class="member-role">Tech Lead</p>
-            <p class="member-bio">Full-stack developer focused on web technologies and AI.</p>
+            <h3 class="member-name">Lila Landa</h3>
+            <p class="member-role">Organitzadora</p>
+            <p class="member-bio">Estudiant d'Enginyeria Informàtica, runner de maratons i l'ànima de la festa.</p>
           </div>
 
           <div class="team-member">
             <div class="member-avatar">
-              <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Crect fill='%23F9AB00' width='120' height='120'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-size='48' fill='white' font-family='Arial'%3EMP%3C/text%3E%3C/svg%3E" 
-                   alt="Profile photo of Maria Perez">
+              <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Crect fill='%233285F5' width='120' height='120'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-size='48' fill='white' font-family='Arial'%3ECH%3C/text%3E%3C/svg%3E" 
+                   alt="Perfil de Claudia Hodoroga">
             </div>
-            <h3 class="member-name">Maria Perez</h3>
-            <p class="member-role">Community Manager</p>
-            <p class="member-bio">Building bridges between students and industry professionals.</p>
+            <h3 class="member-name">Claudia Hodoroga</h3>
+            <p class="member-role">Organitzadora</p>
+            <p class="member-bio">Estudiant de Disseny i Desenvolupament de Videojocs, foodie, escriptora amateur i sempre viu estressada.</p>
           </div>
 
           <div class="team-member">
             <div class="member-avatar">
-              <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Crect fill='%23EA4335' width='120' height='120'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-size='48' fill='white' font-family='Arial'%3ERC%3C/text%3E%3C/svg%3E" 
-                   alt="Profile photo of Ryan Chen">
+              <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Crect fill='%2357CAFF' width='120' height='120'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-size='48' fill='white' font-family='Arial'%3EPF%3C/text%3E%3C/svg%3E" 
+                   alt="Perfil de Pau Fontàs">
             </div>
-            <h3 class="member-name">Ryan Chen</h3>
-            <p class="member-role">Event Coordinator</p>
-            <p class="member-bio">Creating memorable experiences and learning opportunities.</p>
+            <h3 class="member-name">Pau Fontàs</h3>
+            <p class="member-role">Core Team</p>
+            <p class="member-bio">Nou integrant del GDG On Campus Core Team, apassionat pels triangles de xocolata de la cafeteria.</p>
+            
           </div>
         </div>
       </section>
@@ -171,7 +149,7 @@
 
   <!-- Footer -->
   <footer class="footer">
-    <p>&copy; 2025 Google Developer Groups. All rights reserved.</p>
+    <p>&copy; 2025 Google Developer Groups. Tots els drets reservats.</p>
   </footer>
 
   <script src="app.js"></script>
