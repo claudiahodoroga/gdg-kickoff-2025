@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ca">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -28,25 +28,25 @@
   <section class="hero">
     <div class="hero-content">
       <h1 class="hero-title">
-        Welcome to <span class="text-blue">GDG Kickoff</span><br>
+        Benvingut al <span class="text-blue">GDG Kickoff</span><br>
         Capture The Flag 2025
       </h1>
       <p class="hero-subtitle">
-        Test your skills in this 60-minute beginner-friendly cybersecurity challenge.
-        Find hidden flags, earn points, and climb the leaderboard!
+        Posa a prova les teves habilitats en aquest repte de ciberseguretat de 60 minuts per a principiants.
+        Troba flags ocultes, guanya punts i escala al rànquing!
       </p>
       <div class="hero-stats">
         <div class="stat-card">
           <div class="stat-number">6</div>
-          <div class="stat-label">Challenges</div>
+          <div class="stat-label">Reptes</div>
         </div>
         <div class="stat-card">
           <div class="stat-number">60</div>
-          <div class="stat-label">Minutes</div>
+          <div class="stat-label">Minuts</div>
         </div>
         <div class="stat-card">
           <div class="stat-number">650</div>
-          <div class="stat-label">Max Points</div>
+          <div class="stat-label">Punts màxims</div>
         </div>
       </div>
     </div>
@@ -57,15 +57,15 @@
     <div class="auth-container">
       <!-- Register Form -->
       <div class="auth-card" id="registerCard">
-        <h2 class="auth-title">Create Account</h2>
-        <p class="auth-description">Register to start your CTF journey</p>
+        <h2 class="auth-title">Crea un compte</h2>
+        <p class="auth-description">Registra't per començar el teu viatge al CTF</p>
         <form id="registerForm" class="auth-form" novalidate>
           <div class="form-group">
-            <label for="registerUsername">Username</label>
+            <label for="registerUsername">Nom d'usuari</label>
             <input 
               type="text" 
               id="registerUsername" 
-              placeholder="Choose a username" 
+              placeholder="Tria un nom d'usuari" 
               required
               minlength="3"
               maxlength="20"
@@ -73,70 +73,70 @@
               aria-describedby="usernameHelp"
             >
             <small id="usernameHelp" style="color: rgba(255,255,255,0.6); font-size: 0.75rem;">
-              Must contain: 3-20 chars, at least one vowel, one uppercase letter
+              Ha de contenir: 3-20 caràcters, almenys una vocal, una majúscula
             </small>
           </div>
           <div class="form-group">
-            <label for="registerPassword">Password <span style="color: rgba(234, 67, 53, 0.9);">*</span></label>
+            <label for="registerPassword">Contrasenya <span style="color: rgba(234, 67, 53, 0.9);">*</span></label>
             <input 
               type="password" 
               id="registerPassword" 
-              placeholder="Good luck..." 
+              placeholder="Bona sort..." 
               required
               minlength="10"
               autocomplete="new-password"
               aria-describedby="passwordHelp"
             >
             <div id="passwordHelp" style="color: rgba(255,255,255,0.6); font-size: 0.75rem;">
-              <div style="margin:4px 0;">🔒 At least 10 characters</div>
-              <div style="margin:4px 0;">🔤 At least one uppercase letter</div>
-              <div style="margin:4px 0;">🔡 At least one lowercase letter</div>
-              <div style="margin:4px 0;">🔢 At least one number</div>
-              <div style="margin:4px 0;">✨ At least one special character (!@#$%^&*)</div>
-              <div style="margin:4px 0;">👤 At least one letter from your username</div>
-              <div style="margin:4px 0;">🧮 Digits must sum to at least 20</div>
-              <div style="margin:4px 0;">📅 Must include current month number (10)</div>
-              <div style="margin:4px 0;">🚫 Cannot contain the word "password"</div>
+              <div style="margin:4px 0;">🔒 Almenys 10 caràcters</div>
+              <div style="margin:4px 0;">🔤 Almenys una lletra majúscula</div>
+              <div style="margin:4px 0;">🔡 Almenys una lletra minúscula</div>
+              <div style="margin:4px 0;">🔢 Almenys un número</div>
+              <div style="margin:4px 0;">✨ Almenys un caràcter especial (!@#$%^&*)</div>
+              <div style="margin:4px 0;">👤 Almenys una lletra del teu nom d'usuari</div>
+              <div style="margin:4px 0;">🧮 Els dígits han de sumar almenys 20</div>
+              <div style="margin:4px 0;">📅 Ha d'incloure el número del mes actual (10)</div>
+              <div style="margin:4px 0;">🚫 No pot contenir la paraula "password"</div>
             </div>
           </div>
-          <button type="submit" class="btn-primary">Register</button>
+          <button type="submit" class="btn-primary">Registra't</button>
         </form>
         <p class="auth-switch">
-          Already have an account? 
-          <a href="#" id="showLogin">Login here</a>
+          Ja tens un compte? 
+          <a href="#" id="showLogin">Inicia sessió aquí</a>
         </p>
       </div>
 
       <!-- Login Form -->
       <div class="auth-card" id="loginCard" style="display: none;">
-        <h2 class="auth-title">Welcome Back</h2>
-        <p class="auth-description">Login to continue your challenge</p>
+        <h2 class="auth-title">Benvingut de nou</h2>
+        <p class="auth-description">Inicia sessió per continuar el teu repte</p>
         <form id="loginForm" class="auth-form" novalidate>
           <div class="form-group">
-            <label for="loginUsername">Username</label>
+            <label for="loginUsername">Nom d'usuari</label>
             <input 
               type="text" 
               id="loginUsername" 
-              placeholder="Enter your username" 
+              placeholder="Introdueix el teu nom d'usuari" 
               required
               autocomplete="username"
             >
           </div>
           <div class="form-group">
-            <label for="loginPassword">Password</label>
+            <label for="loginPassword">Contrasenya</label>
             <input 
               type="password" 
               id="loginPassword" 
-              placeholder="Enter your password" 
+              placeholder="Introdueix la teva contrasenya" 
               required
               autocomplete="current-password"
             >
           </div>
-          <button type="submit" class="btn-primary">Login</button>
+          <button type="submit" class="btn-primary">Inicia sessió</button>
         </form>
         <p class="auth-switch">
-          Don't have an account? 
-          <a href="#" id="showRegister">Register here</a>
+          Encara no tens un compte? 
+          <a href="#" id="showRegister">Registra't aquí</a>
         </p>
       </div>
 
@@ -148,22 +148,22 @@
   <!-- Info Section -->
   <section class="info-section">
     <div class="info-container">
-      <h2 class="section-title">How to Play</h2>
+      <h2 class="section-title">Com jugar</h2>
       <div class="info-grid">
         <div class="info-card">
           <div class="info-icon">🔍</div>
-          <h3>Explore</h3>
-          <p>Navigate through the website and use browser developer tools to find hidden flags</p>
+          <h3>Explora</h3>
+          <p>Navega pel lloc web i utilitza les eines de desenvolupador del navegador per trobar flags ocultes</p>
         </div>
         <div class="info-card">
           <div class="info-icon">🚩</div>
-          <h3>Capture</h3>
-          <p>Flags follow the format FLAG{text_here}. Submit them to earn points</p>
+          <h3>Captura</h3>
+          <p>Les flags segueixen el format FLAG{text_aquí}. Envia-les per guanyar punts</p>
         </div>
         <div class="info-card">
           <div class="info-icon">🏆</div>
-          <h3>Compete</h3>
-          <p>Climb the leaderboard and compete with other participants for the top spot</p>
+          <h3>Competeix</h3>
+          <p>Escala al rànquing i competeix amb altres participants pel primer lloc</p>
         </div>
       </div>
     </div>
@@ -171,7 +171,7 @@
 
   <!-- Footer -->
   <footer class="footer">
-    <p>&copy; 2025 Google Developer Groups. All rights reserved.</p>
+    <p>&copy; 2025 Google Developer Groups. Tots els drets reservats.</p>
   </footer>
 
   <script src="app.js"></script>
